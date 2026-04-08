@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-06 22:42-0300\n"
+"POT-Creation-Date: 2026-04-08 20:04-0300\n"
 "PO-Revision-Date: 2026-02-28 11:40-0300\n"
-"Last-Translator: Quentin PAGÈS <quentinantonin@free.fr>\n"
+"Last-Translator: Diego Povliuk <diegopvlk@gmail.com>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/cine/app/oc/>\n"
 "Language: oc\n"
 "MIME-Version: 1.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Weblate 5.16-dev\n"
 
 #: data/io.github.diegopvlk.Cine.desktop.in:2 src/main.py:209 src/mpris.py:146
-#: src/mpris.py:364 src/window.py:173 src/window.py:289 src/window.py:1797
+#: src/mpris.py:364 src/window.py:175 src/window.py:292 src/window.py:1806
 #: src/window.blp:6
 msgid "Cine"
 msgstr "Cine"
@@ -63,11 +63,15 @@ msgstr ""
 msgid ""
 "Audio and Subtitles: Control track selection and synchronization for both"
 msgstr ""
+"Àudio e sostítols : contrarotlar la seleccion e la sincronizacion de las "
+"pistas"
 
 #: data/io.github.diegopvlk.Cine.metainfo.xml.in:30
 msgid ""
 "Video Controls: Easily adjust brightness, contrast, zoom, aspect ratio, etc."
 msgstr ""
+"Contraròtles vidèo : ajustatz aisidament la luminositat, lo contraste, lo "
+"zoom, lo format d'imatge, etc."
 
 #: data/io.github.diegopvlk.Cine.metainfo.xml.in:42
 msgid "Video Playing"
@@ -84,12 +88,14 @@ msgstr "Opcions vidèo"
 
 #: data/io.github.diegopvlk.Cine.metainfo.xml.in:54
 msgid "Main Window"
-msgstr ""
+msgstr "Fenèstra principala"
 
 #. Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
 #: src/main.py:219
 msgid "translator-credits"
 msgstr ""
+"Diego Povliuk <diegopvlk@gmail.com>\n"
+"Quentin PAGÈS <quentinantonin@free.fr>"
 
 #: src/mpris.py:153 src/mpris.py:221 src/mpris.py:356
 msgid "Unknown title"
@@ -97,50 +103,52 @@ msgstr "Títol desconegut"
 
 #: src/options.py:193 src/options.blp:79 src/options.blp:137
 msgid "Original"
-msgstr ""
+msgstr "Original"
 
-#: src/playlist.py:76 src/window.py:1223 src/window.py:1636
+#: src/playlist.py:76 src/window.py:1220 src/window.py:1645
 msgid "File Error"
-msgstr ""
+msgstr "Error de fichièr"
 
-#: src/playlist.py:147 src/preferences.blp:138 src/preferences.blp:172
+#: src/playlist.py:148 src/playlist.py:327 src/playlist.blp:43
+msgid "Save Playlist"
+msgstr "Enregistrar la lista de lectura"
+
+#: src/playlist.py:151 src/preferences.blp:139 src/preferences.blp:174
 msgid ""
 "Requires flatpak permission to read the folder where the video is stored"
 msgstr ""
+"Necessita la permission flatpak per legir lo dorsièr onte la vidèo es "
+"emmagazinada"
 
-#: src/playlist.py:253
+#: src/playlist.py:257
 msgid "Open Item Location"
-msgstr ""
+msgstr "Dobrir l'emplaçament de l'element"
 
-#: src/playlist.py:254
+#: src/playlist.py:258
 msgid "Remove from Playlist"
-msgstr ""
+msgstr "Suprimir de la lista de lectura"
 
-#: src/playlist.py:318 src/window.py:647 src/playlist.blp:24 src/window.blp:99
+#: src/playlist.py:322 src/window.py:644 src/playlist.blp:24 src/window.blp:99
 msgid "Add Files"
-msgstr ""
+msgstr "Apondre de fichièrs"
 
-#: src/playlist.py:323 src/playlist.blp:43
-msgid "Save Playlist"
-msgstr ""
-
-#: src/playlist.py:324 src/playlist.blp:5 src/window.blp:349
+#: src/playlist.py:328 src/playlist.blp:5 src/window.blp:349
 msgid "Playlist"
-msgstr ""
+msgstr "Lista de lectura"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
-#: src/shortcuts.py:32 src/shortcuts.py:83 src/shortcuts.py:84
-#: src/window.py:1720 src/window.blp:215
+#: src/shortcuts.py:32 src/shortcuts.py:85 src/shortcuts.py:86
+#: src/window.py:1729 src/window.blp:215
 msgid "Volume"
 msgstr "Volum"
 
 #: src/shortcuts.py:29
 msgid "Volume Increase"
-msgstr ""
+msgstr "Aumentar lo volum"
 
 #: src/shortcuts.py:30
 msgid "Volume Decrease"
-msgstr ""
+msgstr "Demenir lo volum"
 
 #: src/shortcuts.py:33 src/shortcuts.py:34 src/shortcuts.py:35
 #: src/window.blp:198
@@ -149,590 +157,587 @@ msgstr "Lectura/Pausa"
 
 #: src/shortcuts.py:36
 msgid "Show/Hide Subtitles"
-msgstr ""
+msgstr "Afichar/Amagar los sostítols"
 
-#: src/shortcuts.py:37 src/shortcuts.py:38 src/shortcuts.py:206
+#: src/shortcuts.py:37 src/shortcuts.py:38 src/shortcuts.py:208
 #: src/window.blp:257
 msgid "Subtitles"
-msgstr ""
+msgstr "Sostítols"
 
 #: src/shortcuts.py:37
 msgid "Switch to Next Subtitle Track"
-msgstr ""
+msgstr "Passar a la pista de sostítols seguenta"
 
 #: src/shortcuts.py:38
 msgid "Switch to Previous Subtitle Track"
-msgstr ""
+msgstr "Tornar a la pista de sostítols precedenta"
 
 #: src/shortcuts.py:39
 msgid "Secondary Subtitles"
-msgstr ""
+msgstr "Sostítols segondaris"
 
 #: src/shortcuts.py:39
 msgid "Switch Secondary Subtitle Track"
-msgstr ""
+msgstr "Cambiar de pista de sostítol segondari"
 
-#: src/shortcuts.py:40 src/shortcuts.py:41 src/window.py:674 src/window.blp:272
+#: src/shortcuts.py:40 src/shortcuts.py:41 src/window.py:671 src/window.blp:272
 msgid "Audio"
-msgstr ""
+msgstr "Àudio"
 
 #: src/shortcuts.py:40
 msgid "Switch to Next Audio Track"
-msgstr ""
+msgstr "Passar a la pista àudio seguenta"
 
 #: src/shortcuts.py:41
 msgid "Switch to Previous Audio Track"
-msgstr ""
+msgstr "Tornar a la pista àudio precedenta"
 
 #: src/shortcuts.py:42
 msgid "Seek 10s Backward"
-msgstr ""
+msgstr "Recular de 10 segondas"
 
 #: src/shortcuts.py:43
 msgid "Seek 10s Forward"
-msgstr ""
+msgstr "Avançar de 10 segondas"
 
 #: src/shortcuts.py:44
 msgid "Seek 5s Backward"
-msgstr ""
+msgstr "Recular de 5 segondas"
 
 #: src/shortcuts.py:45
 msgid "Seek 5s Forward"
-msgstr ""
+msgstr "Avançar de 5 segondas"
 
-#: src/shortcuts.py:46 src/shortcuts.py:47 src/window.py:1669
+#: src/shortcuts.py:46 src/shortcuts.py:47 src/window.py:1678
 #: src/window.blp:364
 msgid "Fullscreen"
 msgstr "Ecran complèt"
 
-#: src/shortcuts.py:55 src/shortcuts.py:56 src/shortcuts.py:57
-#: src/shortcuts.py:58 src/shortcuts.py:59 src/options.blp:285
+#: src/shortcuts.py:57 src/shortcuts.py:58 src/shortcuts.py:59
+#: src/shortcuts.py:60 src/shortcuts.py:61 src/options.blp:285
 #: src/options.blp:309
 msgid "Zoom"
-msgstr ""
+msgstr "Zoom"
 
-#: src/shortcuts.py:55 src/shortcuts.py:56 src/shortcuts.py:57
+#: src/shortcuts.py:57 src/shortcuts.py:58 src/shortcuts.py:59
 msgid "Zoom In"
-msgstr ""
+msgstr "Zoom avant"
 
-#: src/shortcuts.py:58 src/shortcuts.py:59
+#: src/shortcuts.py:60 src/shortcuts.py:61
 msgid "Zoom Out"
-msgstr ""
+msgstr "Zoom arrièr"
 
-#: src/shortcuts.py:60 src/shortcuts.py:61 src/options.blp:611
+#: src/shortcuts.py:62 src/shortcuts.py:63 src/options.blp:611
 #: src/options.blp:635
 msgid "Subtitle Delay"
-msgstr ""
-
-#: src/shortcuts.py:60
-msgid "Decrease Subtitle Delay"
-msgstr ""
-
-#: src/shortcuts.py:61
-msgid "Increase Subtitle Delay"
-msgstr ""
-
-#: src/shortcuts.py:62 src/shortcuts.py:63
-msgid "Subtitle Position"
-msgstr ""
+msgstr "Relambi dels sostítols"
 
 #: src/shortcuts.py:62
-msgid "Move Subtitles Up"
-msgstr ""
+msgid "Decrease Subtitle Delay"
+msgstr "Demenir lo relambi dels sostítols"
 
 #: src/shortcuts.py:63
-msgid "Move Subtitles Down"
-msgstr ""
+msgid "Increase Subtitle Delay"
+msgstr "Aumentar lo relambi dels sostítols"
 
-#: src/shortcuts.py:64 src/shortcuts.py:65 src/preferences.blp:89
-msgid "Subtitle Scale"
-msgstr ""
+#: src/shortcuts.py:64 src/shortcuts.py:65
+msgid "Subtitle Position"
+msgstr "Posicion dels sostítols"
 
 #: src/shortcuts.py:64
-msgid "Increase Subtitle Scale"
-msgstr ""
+msgid "Move Subtitles Up"
+msgstr "Montar los sostítols"
 
 #: src/shortcuts.py:65
-msgid "Decrease Subtitle Scale"
-msgstr ""
+msgid "Move Subtitles Down"
+msgstr "Davalar los sostítols"
 
-#: src/shortcuts.py:66 src/window.blp:226
-msgid "Mute/Unmute"
-msgstr ""
+#: src/shortcuts.py:66 src/shortcuts.py:67 src/preferences.blp:89
+msgid "Subtitle Scale"
+msgstr "Echelle dels sostítols"
 
-#: src/shortcuts.py:67 src/shortcuts.py:68 src/shortcuts.py:69
-#: src/options.blp:666 src/options.blp:690
-msgid "Audio Delay"
-msgstr ""
+#: src/shortcuts.py:66
+msgid "Increase Subtitle Scale"
+msgstr "Aumentar la talha dels sostítols"
 
 #: src/shortcuts.py:67
+msgid "Decrease Subtitle Scale"
+msgstr "Demenir la talha dels sostítols"
+
+#: src/shortcuts.py:68 src/window.blp:226
+msgid "Mute/Unmute"
+msgstr "Copar/Activar lo son"
+
+#: src/shortcuts.py:69 src/shortcuts.py:70 src/shortcuts.py:71
+#: src/options.blp:666 src/options.blp:690
+msgid "Audio Delay"
+msgstr "Relambi de l'àudio"
+
+#: src/shortcuts.py:69
 msgid "Decrease Audio Delay"
-msgstr ""
+msgstr "Demenir lo relambi de l'àudio"
 
-#: src/shortcuts.py:68 src/shortcuts.py:69
+#: src/shortcuts.py:70 src/shortcuts.py:71
 msgid "Increase Audio Delay"
-msgstr ""
-
-#: src/shortcuts.py:79
-msgid "Go Back One Frame"
-msgstr ""
-
-#: src/shortcuts.py:80
-msgid "Advance One Frame"
-msgstr ""
+msgstr "Aumentar lo relambi de l'àudio"
 
 #: src/shortcuts.py:81
-msgid "Seek to the Previous Chapter"
-msgstr ""
+msgid "Go Back One Frame"
+msgstr "Recular d'un imatge"
 
 #: src/shortcuts.py:82
+msgid "Advance One Frame"
+msgstr "Avançar d'un imatge"
+
+#: src/shortcuts.py:83
+msgid "Seek to the Previous Chapter"
+msgstr "Anar al capítol precedent"
+
+#: src/shortcuts.py:84
 msgid "Seek to the Next Chapter"
-msgstr ""
-
-#: src/shortcuts.py:86
-msgid "Take Screenshot With Subtitles"
-msgstr ""
-
-#: src/shortcuts.py:87
-msgid "Take Screenshot Without Subtitles"
-msgstr ""
+msgstr "Anar al capítol seguent"
 
 #: src/shortcuts.py:88
-msgid "Statistics"
-msgstr ""
+msgid "Take Screenshot With Subtitles"
+msgstr "Prendre una captura d'ecran amb sostítols"
 
 #: src/shortcuts.py:89
-msgid "Statistics Overlay"
-msgstr ""
+msgid "Take Screenshot Without Subtitles"
+msgstr "Prendre una captura d'ecran sens sostítols"
 
 #: src/shortcuts.py:90
-msgid "Loop"
-msgstr ""
-
-#: src/shortcuts.py:90 src/window.blp:339
-msgid "Loop File"
-msgstr ""
-
-#: src/shortcuts.py:91 src/shortcuts.py:92 src/options.blp:340
-#: src/options.blp:363
-msgid "Contrast"
-msgstr ""
+msgid "Statistics"
+msgstr "Estadisticas"
 
 #: src/shortcuts.py:91
-msgid "Decrease Contrast"
-msgstr ""
+msgid "Statistics Overlay"
+msgstr "Superposicion de las estadisticas"
 
 #: src/shortcuts.py:92
-msgid "Increase Contrast"
-msgstr ""
+msgid "Loop"
+msgstr "Bocla"
 
-#: src/shortcuts.py:93 src/shortcuts.py:94 src/options.blp:394
-#: src/options.blp:417
-msgid "Brightness"
-msgstr ""
+#: src/shortcuts.py:92 src/window.blp:339
+msgid "Loop File"
+msgstr "Repetir lo fichièr"
+
+#: src/shortcuts.py:93 src/shortcuts.py:94 src/options.blp:340
+#: src/options.blp:363
+msgid "Contrast"
+msgstr "Contraste"
 
 #: src/shortcuts.py:93
-msgid "Decrease Brightness"
-msgstr ""
+msgid "Decrease Contrast"
+msgstr "Demenir lo contraste"
 
 #: src/shortcuts.py:94
-msgid "Increase Brightness"
-msgstr ""
+msgid "Increase Contrast"
+msgstr "Aumentar lo contraste"
 
-#: src/shortcuts.py:95 src/shortcuts.py:96 src/options.blp:448
-#: src/options.blp:471
-msgid "Gamma"
-msgstr ""
+#: src/shortcuts.py:95 src/shortcuts.py:96 src/options.blp:394
+#: src/options.blp:417
+msgid "Brightness"
+msgstr "Luminositat"
 
 #: src/shortcuts.py:95
-msgid "Decrease Gamma"
-msgstr ""
+msgid "Decrease Brightness"
+msgstr "Demenir la luminositat"
 
 #: src/shortcuts.py:96
-msgid "Increase Gamma"
-msgstr ""
+msgid "Increase Brightness"
+msgstr "Aumentar la luminositat"
 
-#: src/shortcuts.py:97 src/shortcuts.py:98 src/options.blp:502
-#: src/options.blp:525
-msgid "Saturation"
-msgstr ""
+#: src/shortcuts.py:97 src/shortcuts.py:98 src/options.blp:448
+#: src/options.blp:471
+msgid "Gamma"
+msgstr "Gamma"
 
 #: src/shortcuts.py:97
-msgid "Decrease Saturation"
-msgstr ""
+msgid "Decrease Gamma"
+msgstr "Demenir lo gamma"
 
 #: src/shortcuts.py:98
-msgid "Increase Saturation"
-msgstr ""
+msgid "Increase Gamma"
+msgstr "Aumentar lo gamma"
 
-#: src/shortcuts.py:99 src/shortcuts.py:100 src/shortcuts.py:101
+#: src/shortcuts.py:99 src/shortcuts.py:100 src/options.blp:502
+#: src/options.blp:525
+msgid "Saturation"
+msgstr "Saturacion"
+
+#: src/shortcuts.py:99
+msgid "Decrease Saturation"
+msgstr "Demenir la saturacion"
+
+#: src/shortcuts.py:100
+msgid "Increase Saturation"
+msgstr "Aumentar la saturacion"
+
+#: src/shortcuts.py:101 src/shortcuts.py:102 src/shortcuts.py:103
 msgid "Speed"
 msgstr "Velocitat"
 
-#: src/shortcuts.py:99
+#: src/shortcuts.py:101
 msgid "Decrease Playback Speed"
-msgstr ""
+msgstr "Demenir la velocitat de lectura"
 
-#: src/shortcuts.py:100
+#: src/shortcuts.py:102
 msgid "Increase Playback Speed"
-msgstr ""
+msgstr "Aumentar la velocitat de lectura"
 
-#: src/shortcuts.py:101 src/options.blp:711
+#: src/shortcuts.py:103 src/options.blp:711
 msgid "Reset Playback Speed"
-msgstr ""
+msgstr "Reïnicializar la velocitat de lectura"
 
-#: src/shortcuts.py:190
+#: src/shortcuts.py:192
 msgid "Display & Video"
-msgstr ""
-
-#: src/shortcuts.py:207
-msgid "Audio & Volume"
-msgstr ""
-
-#: src/shortcuts.py:208
-msgid "Navigation"
-msgstr ""
+msgstr "Afichage e Vidèo"
 
 #: src/shortcuts.py:209
+msgid "Audio & Volume"
+msgstr "Àudio e Volum"
+
+#: src/shortcuts.py:210
+msgid "Navigation"
+msgstr "Navigacion"
+
+#: src/shortcuts.py:211
 msgid "Playback"
-msgstr ""
+msgstr "Lectura"
 
-#: src/shortcuts.py:213 src/shortcuts.py:219
+#: src/shortcuts.py:215 src/shortcuts.py:221
 msgid "Miscellaneous"
-msgstr ""
+msgstr "Divèrs"
 
-#: src/window.py:524 src/window.py:1215 src/window.blp:114
+#: src/window.py:521 src/window.py:1212 src/window.blp:114
 msgid "Add Subtitle Track"
-msgstr ""
+msgstr "Apondre una pista de sostítol"
 
-#: src/window.py:526 src/window.py:535
+#: src/window.py:523 src/window.py:532
 msgid "None"
-msgstr ""
+msgstr "Cap"
 
-#: src/window.py:533 src/window.blp:119
+#: src/window.py:530 src/window.blp:119
 msgid "Add Audio Track"
-msgstr ""
+msgstr "Apondre una pista àudio"
 
-#: src/window.py:572
+#: src/window.py:569
 msgid "Track"
-msgstr ""
+msgstr "Pista"
 
-#: src/window.py:615 src/playlist.blp:30 src/window.blp:104
+#: src/window.py:612 src/playlist.blp:30 src/window.blp:104
 msgid "Add Folder"
-msgstr ""
+msgstr "Apondre un dorsièr"
 
-#: src/window.py:615 src/shortcuts-dialog.blp:21 src/window.blp:89
+#: src/window.py:612 src/shortcuts-dialog.blp:21 src/window.blp:89
 #: src/window.blp:466
 msgid "Open Folder"
-msgstr ""
+msgstr "Dobrir un dorsièr"
 
-#: src/window.py:644 src/shortcuts-dialog.blp:16 src/window.blp:84
+#: src/window.py:641 src/shortcuts-dialog.blp:16 src/window.blp:84
 msgid "Open Files"
-msgstr ""
+msgstr "Dobrir de fichièrs"
+
+#: src/window.py:647
+msgid "Add Subtitle"
+msgstr "Apondre un sostítol"
 
 #: src/window.py:650
-msgid "Add Subtitle"
-msgstr ""
-
-#: src/window.py:653
 msgid "Add Audio"
-msgstr ""
+msgstr "Apondre un àudio"
 
-#: src/window.py:669
+#: src/window.py:666
 msgid "Subtitle"
-msgstr ""
+msgstr "Sostítol"
 
-#: src/window.py:678
+#: src/window.py:675
 msgid "Media"
-msgstr ""
+msgstr "Mèdia"
 
-#: src/window.py:745 src/playlist.blp:36 src/window.blp:109
+#: src/window.py:742 src/playlist.blp:36 src/window.blp:109
 msgid "Add URL"
-msgstr ""
+msgstr "Apondre una URL"
 
-#: src/window.py:745 src/shortcuts-dialog.blp:26 src/window.blp:94
+#: src/window.py:742 src/shortcuts-dialog.blp:26 src/window.blp:94
 #: src/window.blp:476
 msgid "Open URL"
-msgstr ""
+msgstr "Dobrir una URL"
 
-#: src/window.py:758
+#: src/window.py:755
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
-#: src/window.py:766
+#: src/window.py:763
 msgid "Add"
-msgstr ""
+msgstr "Apondre"
 
-#: src/window.py:766 src/window.blp:78
+#: src/window.py:763 src/window.blp:78
 msgid "Open"
-msgstr ""
+msgstr "Dobrir"
 
-#: src/window.py:939 src/window.py:1056
+#: src/window.py:936 src/window.py:1053
 msgid "Chapter"
-msgstr ""
+msgstr "Capítol"
 
-#: src/window.py:1114
+#: src/window.py:1111
 msgid "Pause"
-msgstr ""
+msgstr "Pausa"
 
-#: src/window.py:1114 src/window.py:1219
+#: src/window.py:1111 src/window.py:1216
 msgid "Play"
-msgstr ""
+msgstr "Legir"
 
-#: src/window.py:1669
+#: src/window.py:1678
 msgid "Exit Fullscreen"
-msgstr ""
+msgstr "Sortir de l'ecran complèt"
 
 #: src/options.blp:14
 msgid "Options"
-msgstr ""
+msgstr "Opcions"
 
 #: src/options.blp:32
 msgid "Reset All"
-msgstr ""
+msgstr "Tot reïnicializar"
 
 #: src/options.blp:44
 msgid "Reset Aspect Ratio"
-msgstr ""
+msgstr "Reïnicializar lo format d'imatge"
 
 #: src/options.blp:54
 msgid "Aspect Ratio"
-msgstr ""
+msgstr "Format d'imatge"
 
 #: src/options.blp:102
 msgid "Reset Crop"
-msgstr ""
+msgstr "Reïnicializar lo talle"
 
 #: src/options.blp:112
 msgid "Crop"
-msgstr ""
+msgstr "Talhar"
 
 #: src/options.blp:161
 msgid "Reset Rotation"
-msgstr ""
+msgstr "Reïnicializar la rotacion"
 
 #: src/options.blp:171
 msgid "Rotate"
-msgstr ""
+msgstr "Virejar"
 
 #: src/options.blp:197
 msgid "Rotate Left"
-msgstr ""
+msgstr "Virejar a esquèrra"
 
 #: src/options.blp:205
 msgid "Rotate Right"
-msgstr ""
+msgstr "Virejar a dreita"
 
 #: src/options.blp:218
 msgid "Reset Flip"
-msgstr ""
+msgstr "Reïnicializar lo capvirament"
 
 #: src/options.blp:228
 msgid "Flip"
-msgstr ""
+msgstr "Capvirar"
 
 #: src/options.blp:254
 msgid "Flip Horizontally"
-msgstr ""
+msgstr "Capvirar orizontalament"
 
 #: src/options.blp:262
 msgid "Flip Vertically"
-msgstr ""
+msgstr "Capvirar verticalament"
 
 #: src/options.blp:275
 msgid "Reset Zoom"
-msgstr ""
+msgstr "Reïnicializar lo zoom"
 
 #: src/options.blp:330
 msgid "Reset Contrast"
-msgstr ""
+msgstr "Reïnicializar lo contraste"
 
 #: src/options.blp:384
 msgid "Reset Brightness"
-msgstr ""
+msgstr "Reïnicializar la luminositat"
 
 #: src/options.blp:438
 msgid "Reset Gamma"
-msgstr ""
+msgstr "Reïnicializar lo gamma"
 
 #: src/options.blp:492
 msgid "Reset Saturation"
-msgstr ""
+msgstr "Reïnicializar la saturacion"
 
 #: src/options.blp:546
 msgid "Reset Hue"
-msgstr ""
+msgstr "Reïnicializar la tinta"
 
 #. TRANSLATORS: Do not use "Color" or "Temperature", those are different things
 #: src/options.blp:557 src/options.blp:580
 msgid "Hue"
-msgstr ""
+msgstr "Tinta"
 
 #: src/options.blp:601
 msgid "Reset Subtitle Delay"
-msgstr ""
+msgstr "Reïnicializar lo relambi dels sostítols"
 
 #: src/options.blp:656
 msgid "Reset Audio Delay"
-msgstr ""
+msgstr "Reïnicializar lo relambi de l'àudio"
 
 #: src/options.blp:721 src/options.blp:745
 msgid "Playback Speed"
-msgstr ""
+msgstr "Velocitat de lectura"
 
 #: src/playlist.blp:98
 msgid "Add to Playlist"
-msgstr ""
+msgstr "Apondre a la lista de lectura"
 
 #: src/preferences.blp:16
 msgid "Open New Window for New Files"
-msgstr ""
+msgstr "Dobrir una fenèstra novèla per los fichièrs novèls"
 
 #: src/preferences.blp:20
 msgid "Subtitle Color"
-msgstr ""
+msgstr "Color dels sostítols"
 
 #: src/preferences.blp:33 src/preferences.blp:79
 msgid "Reset"
-msgstr ""
+msgstr "Reïnicializar"
 
 #: src/preferences.blp:43
 msgid "Subtitle Font"
-msgstr ""
+msgstr "Polissa dels sostítols"
 
 #: src/preferences.blp:56
 msgid "Some fonts may not work"
-msgstr ""
+msgstr "Beler las polissas foncionan pas totas"
 
 #: src/preferences.blp:100
 msgid "Preferred Subtitle Languages"
-msgstr ""
+msgstr "Lengas de sostítols preferidas"
 
 #: src/preferences.blp:101 src/preferences.blp:106
 msgid "Example: en,es,pt"
-msgstr ""
+msgstr "Exemple : oc,fr,en"
 
 #: src/preferences.blp:105
 msgid "Preferred Audio Languages"
-msgstr ""
+msgstr "Lengas àudio preferidas"
 
 #: src/preferences.blp:110
 msgid "Progress Bar Thumbnail"
-msgstr ""
+msgstr "Vinheta de la barra de progression"
 
 #: src/preferences.blp:114
 msgid "Hardware Decoding"
-msgstr ""
+msgstr "Descodatge material"
 
 #: src/preferences.blp:118
 msgid "Normalize Volume"
-msgstr ""
+msgstr "Normalizar lo volum"
 
 #: src/preferences.blp:122
 msgid "Save Session on Close"
-msgstr ""
+msgstr "Enregistrar la session a la deconnexion"
 
 #: src/preferences.blp:123
 msgid "Restore files and auto-play on startup"
-msgstr ""
-
-#: src/preferences.blp:156
-msgid "Save Video Position on Close"
-msgstr ""
+msgstr "Restaurar los fichièrs e lectura automatica a l'aviada"
 
 #: src/preferences.blp:157
+msgid "Save Video Position on Close"
+msgstr "Enregistrar la posicion de la vidèo a la tancadura"
+
+#: src/preferences.blp:158
 msgid "Also save options like brightness, subtitle delay, etc."
 msgstr ""
+"Enregistrar tanben las opcions coma la luminositat, lo relambi dels "
+"sostítols, etc."
 
 #: src/shortcuts-dialog.blp:8
 msgid "Shortcuts"
-msgstr ""
+msgstr "Acorchis"
 
 #: src/shortcuts-dialog.blp:31
 msgid "Add Files to Playlist"
-msgstr ""
+msgstr "Apondre de fichièrs a la lista de lectura"
 
 #: src/shortcuts-dialog.blp:36
 msgid "Add Folder to Playlist"
-msgstr ""
+msgstr "Apondre un dorsièr a la lista de lectura"
 
 #: src/shortcuts-dialog.blp:41
 msgid "Add URL to Playlist"
-msgstr ""
+msgstr "Apondre una URL a la lista de lectura"
 
 #: src/shortcuts-dialog.blp:46
 msgid "Open Subtitles Menu"
-msgstr ""
+msgstr "Dobrir lo menú dels sostítols"
 
 #: src/shortcuts-dialog.blp:51
 msgid "Open Audio Menu"
-msgstr ""
+msgstr "Dobrir lo menú àudio"
 
 #: src/shortcuts-dialog.blp:56
 msgid "Open Chapters Menu"
-msgstr ""
+msgstr "Dobrir lo menú dels capítols"
 
 #: src/shortcuts-dialog.blp:61
 msgid "Show Shortcuts"
-msgstr ""
+msgstr "Afichar los acorchis"
 
 #: src/shortcuts-dialog.blp:66
 msgid "Close Window"
-msgstr ""
+msgstr "Tampar la fenèstra"
 
 #: src/shortcuts-dialog.blp:71
 msgid "Quit"
-msgstr ""
+msgstr "Quitar"
 
 #: src/window.blp:130
 msgid "Main Menu"
-msgstr ""
+msgstr "Menú principal"
 
 #: src/window.blp:145
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "Acorchis de clavièr"
 
 #: src/window.blp:150
 msgid "About Cine"
-msgstr ""
+msgstr "A prepaus de Cine"
 
 #: src/window.blp:188
 msgid "Previous"
-msgstr ""
+msgstr "Precedent"
 
 #: src/window.blp:208
 msgid "Next"
-msgstr ""
+msgstr "Seguent"
 
 #: src/window.blp:286
 msgid "Video"
-msgstr ""
+msgstr "Vidèo"
 
 #: src/window.blp:300
 msgid "Chapters"
-msgstr ""
+msgstr "Capítols"
 
 #: src/window.blp:317
 msgid "Shuffle Playlist"
-msgstr ""
+msgstr "Mesclar la lista de lectura"
 
 #: src/window.blp:328
 msgid "Loop Playlist"
-msgstr ""
+msgstr "Lista de lectura en bocla"
 
 #: src/window.blp:396
 msgid "Toggle Elapsed/Remaining"
-msgstr ""
+msgstr "Bascular temps passat/restant"
 
 #: src/window.blp:442
 msgid "Drag and Drop Files Here"
-msgstr ""
+msgstr "Lisatz e depausatz de fichièrs aicí"
 
 #: src/window.blp:455
 msgid "Open…"
-msgstr ""
-
-#, fuzzy
-#~| msgid "Mute"
-#~ msgid "Muted"
-#~ msgstr "Amudir"
+msgstr "Dobrir…"
