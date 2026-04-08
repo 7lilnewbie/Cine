@@ -205,6 +205,7 @@ class CineWindow(Adw.ApplicationWindow):
             keep_open=True,
             keep_open_pause=False,
             ytdl=True,
+            cursor_autohide_fs_only=True,
         )
 
         if self.mpv["window-maximized"]:
@@ -496,7 +497,11 @@ class CineWindow(Adw.ApplicationWindow):
                 self.revealer_ui.set_reveal_child(False)
                 self.chapter_popover.popdown()
 
-            if self.is_fs and not active_or_hover and not self.props.dialogs:
+            if (
+                (self.is_fs or not self.mpv["cursor-autohide-fs-only"])
+                and not active_or_hover
+                and not self.props.dialogs
+            ):
                 self.set_cursor_from_name("none")
         except mpv.ShutdownError:
             return
