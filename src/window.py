@@ -483,30 +483,29 @@ class CineWindow(Adw.ApplicationWindow):
 
     def _hide_ui(self, *args):
         try:
-            if self.mpv:
-                self._hide_timeout_id = None
-                controls_hover = self.motion_controls.props.contains_pointer
-                header_hover = self.motion_header.props.contains_pointer
+            self._hide_timeout_id = None
+            controls_hover = self.motion_controls.props.contains_pointer
+            header_hover = self.motion_header.props.contains_pointer
 
-                active_or_hover = (
-                    self.mpv.idle_active
-                    or header_hover
-                    or controls_hover
-                    or self.primary_menu_button.props.active
-                    or self.open_menu_button.props.active
-                    or self.options_menu_button.props.active
-                    or self.volume_menu_button.props.active
-                    or self.subtitles_menu_button.props.active
-                    or self.audio_tracks_menu_button.props.active
-                    or self.video_tracks_menu_button.props.active
-                    or self.chapters_menu_button.props.active
-                )
-                if not active_or_hover:
-                    self.revealer_ui.set_reveal_child(False)
-                    self.chapter_popover.popdown()
+            active_or_hover = (
+                self.mpv.idle_active
+                or header_hover
+                or controls_hover
+                or self.primary_menu_button.props.active
+                or self.open_menu_button.props.active
+                or self.options_menu_button.props.active
+                or self.volume_menu_button.props.active
+                or self.subtitles_menu_button.props.active
+                or self.audio_tracks_menu_button.props.active
+                or self.video_tracks_menu_button.props.active
+                or self.chapters_menu_button.props.active
+            )
+            if not active_or_hover:
+                self.revealer_ui.set_reveal_child(False)
+                self.chapter_popover.popdown()
 
-                if self.is_fs and not active_or_hover and not self.props.dialogs:
-                    self.set_cursor_from_name("none")
+            if self.is_fs and not active_or_hover and not self.props.dialogs:
+                self.set_cursor_from_name("none")
         except mpv.ShutdownError:
             return
 
