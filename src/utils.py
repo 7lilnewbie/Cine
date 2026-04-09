@@ -123,10 +123,14 @@ KEY_REMAP: dict = {
 
 
 SUB_EXTS: tuple = (
+    ".aqt",
     ".ass",
+    ".dfxp",
     ".idx",
+    ".jss",
     ".lrc",
     ".mks",
+    ".mpl",
     ".pgs",
     ".rt",
     ".sbv",
@@ -136,7 +140,7 @@ SUB_EXTS: tuple = (
     ".ssa",
     ".sub",
     ".sup",
-    ".utf",
-    ".utf-8",
-    ".utf8",
+    ".ttml",
+    ".txt",
+    ".vtt",
 )
