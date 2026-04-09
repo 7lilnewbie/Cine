@@ -1291,15 +1291,12 @@ class CineWindow(Adw.ApplicationWindow):
         else:
             self.unfullscreen()
 
-    def _on_key_event(self, _controller, keyval, _keycode, state, event_type):
+    def _on_key_event(self, controller, keyval, _keycode, state, event_type):
         key_name = Gdk.keyval_name(keyval)
 
         if event_type == "keyup":
             self.pressed_keys.discard(keyval)
             return
-
-        if key_name == "space" and keyval in self.pressed_keys:
-            return  # don't repeat space
 
         self.pressed_keys.add(keyval)
 
