@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-12 11:07-0300\n"
+"POT-Creation-Date: 2026-04-17 17:47-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -102,7 +102,7 @@ msgstr ""
 msgid "Save Playlist"
 msgstr ""
 
-#: src/playlist.py:151 src/preferences.blp:139 src/preferences.blp:174
+#: src/playlist.py:151 src/preferences.blp:156 src/preferences.blp:191
 msgid ""
 "Requires flatpak permission to read the folder where the video is stored"
 msgstr ""
@@ -121,6 +121,14 @@ msgstr ""
 
 #: src/playlist.py:328 src/playlist.blp:5 src/window.blp:349
 msgid "Playlist"
+msgstr ""
+
+#: src/preferences.py:105 src/preferences.blp:20
+msgid "Subtitle Color"
+msgstr ""
+
+#: src/preferences.py:119 src/preferences.blp:100
+msgid "Subtitle Background"
 msgstr ""
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
@@ -587,10 +595,6 @@ msgstr ""
 msgid "Open New Window for New Files"
 msgstr ""
 
-#: src/preferences.blp:20
-msgid "Subtitle Color"
-msgstr ""
-
 #: src/preferences.blp:33 src/preferences.blp:79
 msgid "Reset"
 msgstr ""
@@ -603,43 +607,43 @@ msgstr ""
 msgid "Some fonts may not work"
 msgstr ""
 
-#: src/preferences.blp:100
+#: src/preferences.blp:117
 msgid "Preferred Subtitle Languages"
 msgstr ""
 
-#: src/preferences.blp:101 src/preferences.blp:106
+#: src/preferences.blp:118 src/preferences.blp:123
 msgid "Example: en,es,pt"
 msgstr ""
 
-#: src/preferences.blp:105
+#: src/preferences.blp:122
 msgid "Preferred Audio Languages"
 msgstr ""
 
-#: src/preferences.blp:110
+#: src/preferences.blp:127
 msgid "Progress Bar Thumbnail"
 msgstr ""
 
-#: src/preferences.blp:114
+#: src/preferences.blp:131
 msgid "Hardware Decoding"
 msgstr ""
 
-#: src/preferences.blp:118
+#: src/preferences.blp:135
 msgid "Normalize Volume"
 msgstr ""
 
-#: src/preferences.blp:122
+#: src/preferences.blp:139
 msgid "Save Session on Close"
 msgstr ""
 
-#: src/preferences.blp:123
+#: src/preferences.blp:140
 msgid "Restore files and auto-play on startup"
 msgstr ""
 
-#: src/preferences.blp:157
+#: src/preferences.blp:174
 msgid "Save Video Position on Close"
 msgstr ""
 
-#: src/preferences.blp:158
+#: src/preferences.blp:175
 msgid "Also save options like brightness, subtitle delay, etc."
 msgstr ""
 

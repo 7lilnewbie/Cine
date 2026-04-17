@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-12 11:07-0300\n"
+"POT-Creation-Date: 2026-04-17 17:47-0300\n"
 "PO-Revision-Date: 2026-03-17 11:09+0000\n"
 "Last-Translator: 心就在那里 <xjznlonly@gmail.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -104,7 +104,7 @@ msgstr "文件错误"
 msgid "Save Playlist"
 msgstr "保存播放列表"
 
-#: src/playlist.py:151 src/preferences.blp:139 src/preferences.blp:174
+#: src/playlist.py:151 src/preferences.blp:156 src/preferences.blp:191
 msgid ""
 "Requires flatpak permission to read the folder where the video is stored"
 msgstr "需要flatpak权限才能读取存储视频的文件夹"
@@ -124,6 +124,14 @@ msgstr "添加文件"
 #: src/playlist.py:328 src/playlist.blp:5 src/window.blp:349
 msgid "Playlist"
 msgstr "播放列表"
+
+#: src/preferences.py:105 src/preferences.blp:20
+msgid "Subtitle Color"
+msgstr "字幕颜色"
+
+#: src/preferences.py:119 src/preferences.blp:100
+msgid "Subtitle Background"
+msgstr "字幕背景"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:85 src/shortcuts.py:86
@@ -589,10 +597,6 @@ msgstr "添加到播放列表"
 msgid "Open New Window for New Files"
 msgstr "为新文件打开新窗口"
 
-#: src/preferences.blp:20
-msgid "Subtitle Color"
-msgstr "字幕颜色"
-
 #: src/preferences.blp:33 src/preferences.blp:79
 msgid "Reset"
 msgstr "重置"
@@ -605,43 +609,43 @@ msgstr "字幕字体"
 msgid "Some fonts may not work"
 msgstr "某些字体可能无法使用"
 
-#: src/preferences.blp:100
+#: src/preferences.blp:117
 msgid "Preferred Subtitle Languages"
 msgstr "首选字幕语言"
 
-#: src/preferences.blp:101 src/preferences.blp:106
+#: src/preferences.blp:118 src/preferences.blp:123
 msgid "Example: en,es,pt"
 msgstr "示例：zh，en，ja"
 
-#: src/preferences.blp:105
+#: src/preferences.blp:122
 msgid "Preferred Audio Languages"
 msgstr "首选音频语言"
 
-#: src/preferences.blp:110
+#: src/preferences.blp:127
 msgid "Progress Bar Thumbnail"
 msgstr "进度条缩略图"
 
-#: src/preferences.blp:114
+#: src/preferences.blp:131
 msgid "Hardware Decoding"
 msgstr "硬件解码"
 
-#: src/preferences.blp:118
+#: src/preferences.blp:135
 msgid "Normalize Volume"
 msgstr "音量标准化"
 
-#: src/preferences.blp:122
+#: src/preferences.blp:139
 msgid "Save Session on Close"
 msgstr "关闭时保存会话"
 
-#: src/preferences.blp:123
+#: src/preferences.blp:140
 msgid "Restore files and auto-play on startup"
 msgstr "启动时恢复文件并自动播放"
 
-#: src/preferences.blp:157
+#: src/preferences.blp:174
 msgid "Save Video Position on Close"
 msgstr "关闭时保存视频位置"
 
-#: src/preferences.blp:158
+#: src/preferences.blp:175
 msgid "Also save options like brightness, subtitle delay, etc."
 msgstr "也保存像亮度，字幕延迟等选项。"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-12 11:07-0300\n"
+"POT-Creation-Date: 2026-04-17 17:47-0300\n"
 "PO-Revision-Date: 2026-02-28 11:40-0300\n"
 "Last-Translator: Diego Povliuk <diegopvlk@gmail.com>\n"
 "Language-Team: Spanish\n"
@@ -110,7 +110,7 @@ msgstr "Error de Archivo"
 msgid "Save Playlist"
 msgstr "Guardar Lista de Reproducción"
 
-#: src/playlist.py:151 src/preferences.blp:139 src/preferences.blp:174
+#: src/playlist.py:151 src/preferences.blp:156 src/preferences.blp:191
 msgid ""
 "Requires flatpak permission to read the folder where the video is stored"
 msgstr ""
@@ -132,6 +132,14 @@ msgstr "Añadir Archivos"
 #: src/playlist.py:328 src/playlist.blp:5 src/window.blp:349
 msgid "Playlist"
 msgstr "Lista de Reproducción"
+
+#: src/preferences.py:105 src/preferences.blp:20
+msgid "Subtitle Color"
+msgstr "Color de Subtítulos"
+
+#: src/preferences.py:119 src/preferences.blp:100
+msgid "Subtitle Background"
+msgstr "Fondo de subtítulos"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:85 src/shortcuts.py:86
@@ -597,10 +605,6 @@ msgstr "Añadir a la Lista de Reproducción"
 msgid "Open New Window for New Files"
 msgstr "Abrir una Nueva Ventana para Archivos Nuevos"
 
-#: src/preferences.blp:20
-msgid "Subtitle Color"
-msgstr "Color de Subtítulos"
-
 #: src/preferences.blp:33 src/preferences.blp:79
 msgid "Reset"
 msgstr "Restablecer"
@@ -613,43 +617,43 @@ msgstr "Fuente de Subtítulos"
 msgid "Some fonts may not work"
 msgstr "Es posible que algunas fuentes no funcionen"
 
-#: src/preferences.blp:100
+#: src/preferences.blp:117
 msgid "Preferred Subtitle Languages"
 msgstr "Idiomas de Subtítulos Preferidos"
 
-#: src/preferences.blp:101 src/preferences.blp:106
+#: src/preferences.blp:118 src/preferences.blp:123
 msgid "Example: en,es,pt"
 msgstr "Ejemplo: es,pt,en"
 
-#: src/preferences.blp:105
+#: src/preferences.blp:122
 msgid "Preferred Audio Languages"
 msgstr "Idiomas de Audio Preferidos"
 
-#: src/preferences.blp:110
+#: src/preferences.blp:127
 msgid "Progress Bar Thumbnail"
 msgstr "Miniatura de la Barra de Progreso"
 
-#: src/preferences.blp:114
+#: src/preferences.blp:131
 msgid "Hardware Decoding"
 msgstr "Decodificación de Hardware"
 
-#: src/preferences.blp:118
+#: src/preferences.blp:135
 msgid "Normalize Volume"
 msgstr "Normalizar Volumen"
 
-#: src/preferences.blp:122
+#: src/preferences.blp:139
 msgid "Save Session on Close"
 msgstr "Guardar Sesión al Cerrar"
 
-#: src/preferences.blp:123
+#: src/preferences.blp:140
 msgid "Restore files and auto-play on startup"
 msgstr "Restaurar archivos y autoreproducir al iniciar"
 
-#: src/preferences.blp:157
+#: src/preferences.blp:174
 msgid "Save Video Position on Close"
 msgstr "Guardar Posición del Vídeo al Cerrar"
 
-#: src/preferences.blp:158
+#: src/preferences.blp:175
 msgid "Also save options like brightness, subtitle delay, etc."
 msgstr "También guarda opciones como brillo, retraso de subtítulos, etc."
 

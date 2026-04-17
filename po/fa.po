@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-12 11:07-0300\n"
+"POT-Creation-Date: 2026-04-17 17:47-0300\n"
 "PO-Revision-Date: 2026-04-03 15:09+0000\n"
 "Last-Translator: Danial Behzadi <dani.behzi@ubuntu.com>\n"
 "Language-Team: Persian <https://hosted.weblate.org/projects/cine/app/fa/>\n"
@@ -111,7 +111,7 @@ msgstr "خطای پرونده"
 msgid "Save Playlist"
 msgstr "ذخیرهٔ سیاههٔ پخش"
 
-#: src/playlist.py:151 src/preferences.blp:139 src/preferences.blp:174
+#: src/playlist.py:151 src/preferences.blp:156 src/preferences.blp:191
 msgid ""
 "Requires flatpak permission to read the folder where the video is stored"
 msgstr "نیازمند اجازهٔ فلت‌پک برای خواندن شاخهٔ محل ذخیرهٔ ویدیو"
@@ -131,6 +131,14 @@ msgstr "افزودن پرونده‌ها"
 #: src/playlist.py:328 src/playlist.blp:5 src/window.blp:349
 msgid "Playlist"
 msgstr "سیاههٔ پخش"
+
+#: src/preferences.py:105 src/preferences.blp:20
+msgid "Subtitle Color"
+msgstr "رنگ زیرنویس"
+
+#: src/preferences.py:119 src/preferences.blp:100
+msgid "Subtitle Background"
+msgstr "پس‌زمینه زیرنویس"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:85 src/shortcuts.py:86
@@ -596,10 +604,6 @@ msgstr "افزودن به سیاههٔ پخش"
 msgid "Open New Window for New Files"
 msgstr "گشودن پنجرهٔ جدید برای پرونده‌های جدید"
 
-#: src/preferences.blp:20
-msgid "Subtitle Color"
-msgstr "رنگ زیرنویس"
-
 #: src/preferences.blp:33 src/preferences.blp:79
 msgid "Reset"
 msgstr "بازنشانی"
@@ -612,43 +616,43 @@ msgstr "قلم زیرنویس"
 msgid "Some fonts may not work"
 msgstr "برخی قلم‌ها ممکن است کار نکنند"
 
-#: src/preferences.blp:100
+#: src/preferences.blp:117
 msgid "Preferred Subtitle Languages"
 msgstr "زبان‌های زیرنویس دلخواه"
 
-#: src/preferences.blp:101 src/preferences.blp:106
+#: src/preferences.blp:118 src/preferences.blp:123
 msgid "Example: en,es,pt"
 msgstr "نمونه: fa,en,es"
 
-#: src/preferences.blp:105
+#: src/preferences.blp:122
 msgid "Preferred Audio Languages"
 msgstr "زبان‌های صدای دلخواه"
 
-#: src/preferences.blp:110
+#: src/preferences.blp:127
 msgid "Progress Bar Thumbnail"
 msgstr "پیش‌نمایش نوار پیشرفت"
 
-#: src/preferences.blp:114
+#: src/preferences.blp:131
 msgid "Hardware Decoding"
 msgstr "کدگشایی سخت‌افزاری"
 
-#: src/preferences.blp:118
+#: src/preferences.blp:135
 msgid "Normalize Volume"
 msgstr "عادی‌سازی حجم صدا"
 
-#: src/preferences.blp:122
+#: src/preferences.blp:139
 msgid "Save Session on Close"
 msgstr "ذخیرهٔ نشست هنگام بستن"
 
-#: src/preferences.blp:123
+#: src/preferences.blp:140
 msgid "Restore files and auto-play on startup"
 msgstr "بازگردانی پرونده‌ها و پخش خودکار در هنگام شروع"
 
-#: src/preferences.blp:157
+#: src/preferences.blp:174
 msgid "Save Video Position on Close"
 msgstr "ذخیره موقعیت ویدیو هنگام بستن"
 
-#: src/preferences.blp:158
+#: src/preferences.blp:175
 msgid "Also save options like brightness, subtitle delay, etc."
 msgstr "همچنین ذخیره گزینه‌هایی مانند روشنایی، تأخیر زیرنویس و..."
 

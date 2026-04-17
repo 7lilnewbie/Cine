@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-12 11:07-0300\n"
+"POT-Creation-Date: 2026-04-17 17:47-0300\n"
 "PO-Revision-Date: 2026-02-28 11:40-0300\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -111,7 +111,7 @@ msgstr "Bestandsfout"
 msgid "Save Playlist"
 msgstr "Afspeellijst opslaan"
 
-#: src/playlist.py:151 src/preferences.blp:139 src/preferences.blp:174
+#: src/playlist.py:151 src/preferences.blp:156 src/preferences.blp:191
 msgid ""
 "Requires flatpak permission to read the folder where the video is stored"
 msgstr ""
@@ -133,6 +133,14 @@ msgstr "Bestanden toevoegen"
 #: src/playlist.py:328 src/playlist.blp:5 src/window.blp:349
 msgid "Playlist"
 msgstr "Afspeellijst"
+
+#: src/preferences.py:105 src/preferences.blp:20
+msgid "Subtitle Color"
+msgstr "Ondertitelkleur"
+
+#: src/preferences.py:119 src/preferences.blp:100
+msgid "Subtitle Background"
+msgstr "Ondertitelachtergrond"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:85 src/shortcuts.py:86
@@ -598,10 +606,6 @@ msgstr "Toevoegen aan afspeellijst"
 msgid "Open New Window for New Files"
 msgstr "Nieuwe bestanden in nieuwe vensters openen"
 
-#: src/preferences.blp:20
-msgid "Subtitle Color"
-msgstr "Ondertitelkleur"
-
 #: src/preferences.blp:33 src/preferences.blp:79
 msgid "Reset"
 msgstr "Standaardwaarde"
@@ -614,43 +618,43 @@ msgstr "Lettertype van ondertiteling"
 msgid "Some fonts may not work"
 msgstr "Let op: sommige lettertypen werken mogelijk niet"
 
-#: src/preferences.blp:100
+#: src/preferences.blp:117
 msgid "Preferred Subtitle Languages"
 msgstr "Voorkeurstalen voor ondertiteling"
 
-#: src/preferences.blp:101 src/preferences.blp:106
+#: src/preferences.blp:118 src/preferences.blp:123
 msgid "Example: en,es,pt"
 msgstr "Voorbeeld: nl-NL,nl,en,de"
 
-#: src/preferences.blp:105
+#: src/preferences.blp:122
 msgid "Preferred Audio Languages"
 msgstr "Voorkeurstalen voor audio"
 
-#: src/preferences.blp:110
+#: src/preferences.blp:127
 msgid "Progress Bar Thumbnail"
 msgstr "Voorvertoning voortgangsbalk"
 
-#: src/preferences.blp:114
+#: src/preferences.blp:131
 msgid "Hardware Decoding"
 msgstr "Hardwareversnelling"
 
-#: src/preferences.blp:118
+#: src/preferences.blp:135
 msgid "Normalize Volume"
 msgstr "Volumeniveau normaliseren"
 
-#: src/preferences.blp:122
+#: src/preferences.blp:139
 msgid "Save Session on Close"
 msgstr "Sessie opslaan bij afsluiten"
 
-#: src/preferences.blp:123
+#: src/preferences.blp:140
 msgid "Restore files and auto-play on startup"
 msgstr "Bestanden herstellen en automatisch afspelen bij opstarten"
 
-#: src/preferences.blp:157
+#: src/preferences.blp:174
 msgid "Save Video Position on Close"
 msgstr "Videopositie onthouden na sluiten"
 
-#: src/preferences.blp:158
+#: src/preferences.blp:175
 msgid "Also save options like brightness, subtitle delay, etc."
 msgstr ""
 "Aanvullende opties eveneens onthouden, zoals helderheid, ondertiteling, etc."

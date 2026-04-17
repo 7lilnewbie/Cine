@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-12 11:07-0300\n"
+"POT-Creation-Date: 2026-04-17 17:47-0300\n"
 "PO-Revision-Date: 2026-04-17 12:40+0000\n"
 "Last-Translator: Mustafa <mm505ali@gmail.com>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cine/app/ar/>\n"
@@ -110,7 +110,7 @@ msgstr "خطأ في الملف"
 msgid "Save Playlist"
 msgstr "حفظ قائمة التشغيل"
 
-#: src/playlist.py:151 src/preferences.blp:139 src/preferences.blp:174
+#: src/playlist.py:151 src/preferences.blp:156 src/preferences.blp:191
 msgid ""
 "Requires flatpak permission to read the folder where the video is stored"
 msgstr "يتطلب صلاحية من فلاتباك لقراءة المجلد الذي يتواجد فيه الفيديو"
@@ -130,6 +130,14 @@ msgstr "اضف ملفات"
 #: src/playlist.py:328 src/playlist.blp:5 src/window.blp:349
 msgid "Playlist"
 msgstr "قائمة التشغيل"
+
+#: src/preferences.py:105 src/preferences.blp:20
+msgid "Subtitle Color"
+msgstr "لون الترجمة"
+
+#: src/preferences.py:119 src/preferences.blp:100
+msgid "Subtitle Background"
+msgstr "خلفية الترجمة"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:85 src/shortcuts.py:86
@@ -595,10 +603,6 @@ msgstr "اضِف لقائمة التشغيل"
 msgid "Open New Window for New Files"
 msgstr "فتح نافذة جديدة لكل ملف"
 
-#: src/preferences.blp:20
-msgid "Subtitle Color"
-msgstr "لون الترجمة"
-
 #: src/preferences.blp:33 src/preferences.blp:79
 msgid "Reset"
 msgstr "تصفير"
@@ -611,43 +615,43 @@ msgstr "خط الترجمة"
 msgid "Some fonts may not work"
 msgstr "قد لا تعمل بعض الخطوط"
 
-#: src/preferences.blp:100
+#: src/preferences.blp:117
 msgid "Preferred Subtitle Languages"
 msgstr "لغات الترجمة المفضَّلة"
 
-#: src/preferences.blp:101 src/preferences.blp:106
+#: src/preferences.blp:118 src/preferences.blp:123
 msgid "Example: en,es,pt"
 msgstr "مثال: ar,en,fr"
 
-#: src/preferences.blp:105
+#: src/preferences.blp:122
 msgid "Preferred Audio Languages"
 msgstr "لغات الصوت المفضَّلة"
 
-#: src/preferences.blp:110
+#: src/preferences.blp:127
 msgid "Progress Bar Thumbnail"
 msgstr "صورة مصغرة لشريط التقدم"
 
-#: src/preferences.blp:114
+#: src/preferences.blp:131
 msgid "Hardware Decoding"
 msgstr "فك الترميز باستخدام العتاد"
 
-#: src/preferences.blp:118
+#: src/preferences.blp:135
 msgid "Normalize Volume"
 msgstr "مساواة الصوت"
 
-#: src/preferences.blp:122
+#: src/preferences.blp:139
 msgid "Save Session on Close"
 msgstr "حفظ الجلسة عند الإغلاق"
 
-#: src/preferences.blp:123
+#: src/preferences.blp:140
 msgid "Restore files and auto-play on startup"
 msgstr "استعادة الملفات والتشغيل التلقائي عند بدء التشغيل"
 
-#: src/preferences.blp:157
+#: src/preferences.blp:174
 msgid "Save Video Position on Close"
 msgstr "حفظ تقدُّم الفيديو عند الإغلاق"
 
-#: src/preferences.blp:158
+#: src/preferences.blp:175
 msgid "Also save options like brightness, subtitle delay, etc."
 msgstr "يحفظ أيضًا الخيارات كالسطوع، تأخير الترجمة، إلخ."
 
