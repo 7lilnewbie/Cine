@@ -32,6 +32,7 @@ from gi.repository import Adw, Gio, GLib, Gtk
 from .window import CineWindow
 from .preferences import Preferences, settings
 from .mpris import MPRIS
+from .save_session import is_same_playlist
 
 # Set the icon shown in gnome sound settings
 os.environ["PIPEWIRE_PROPS"] = '{application.icon-name="io.github.diegopvlk.Cine"}'
@@ -56,7 +57,7 @@ class CineApplication(Adw.Application):
             None,
         )
 
-        self.connect("window-removed", self._on_window_removed)
+        self.connect("shutdown", self._on_shutdown)
 
     def do_startup(self):
         MPRIS(self)
@@ -133,6 +134,8 @@ class CineApplication(Adw.Application):
             win.present()
         else:
             win.present()
+            if is_same_playlist(win.mpv.playlist):
+                win.mpv.write_watch_later_config()
             win.mpv.stop()
 
         for gfile in files:
@@ -273,8 +276,9 @@ class CineApplication(Adw.Application):
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
 
-    def _on_window_removed(self, _obj, win):
-        win.mpv.quit()
+    def _on_shutdown(self, *args):
+        for win in self.get_windows():
+            win.close()
 
 
 def main(version):

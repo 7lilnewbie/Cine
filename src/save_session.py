@@ -48,3 +48,23 @@ def restore_last_playlist(window, app, win_mpv):
     if os.path.exists(LAST_PLAYLIST_FILE):
         window.start_page.set_sensitive(False)
         GLib.idle_add(win_mpv.loadfile, LAST_PLAYLIST_FILE, "replace")
+
+
+def is_same_playlist(mpv_playlist):
+    """Compares current playlist with the saved file from last session."""
+
+    try:
+        with open(LAST_PLAYLIST_FILE, "r", encoding="utf-8") as f:
+            saved_filenames = [
+                line.strip()
+                for line in f
+                if line.strip() and not line.startswith("#EXTM3U")
+            ]
+
+        curr_filenames = [item.get("filename") for item in mpv_playlist]
+
+        return saved_filenames == curr_filenames
+
+    except Exception as e:
+        print(f"Error reading last playlist file: {e}")
+        return False

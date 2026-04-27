@@ -25,8 +25,13 @@ from typing import cast
 from gettext import gettext as _
 from urllib.parse import urlparse
 from time import time
-from .save_session import save_last_playlist_file, restore_last_playlist
 import shlex
+
+from .save_session import (
+    save_last_playlist_file,
+    restore_last_playlist,
+    is_same_playlist,
+)
 
 from .utils import (
     get_mouse_bindings,
@@ -256,7 +261,7 @@ class CineWindow(Adw.ApplicationWindow):
         self._create_action("open-sub-menu", self._on_open_sub_menu)
         self._create_action("open-audio-menu", self._on_open_audio_menu)
         self._create_action("open-chapters-menu", self._on_open_chapters_menu)
-        self._create_action("save-session", self.on_save_session_and_close)
+        self._create_action("save-session", self._on_save_session_and_close)
 
         self.app.set_accels_for_action("win.open-folder", ["<primary>i"])
         self.app.set_accels_for_action("win.open-url", ["<primary>u"])
@@ -268,7 +273,7 @@ class CineWindow(Adw.ApplicationWindow):
         self.app.set_accels_for_action("win.open-sub-menu", ["<primary>s"])
         self.app.set_accels_for_action("win.open-audio-menu", ["<primary>a"])
         self.app.set_accels_for_action("win.open-chapters-menu", ["<primary>c"])
-        self.app.set_accels_for_action("win.save-session", ["<alt>q"])
+        self.app.set_accels_for_action("win.save-session", ["<shift>q"])
 
         self._create_action("quit", lambda *a: self.close())
         self.app.set_accels_for_action("win.quit", ["q", "<primary>w"])
@@ -447,8 +452,15 @@ class CineWindow(Adw.ApplicationWindow):
             self.chapters_menu_button,
         ]
         for btn in buttons:
-            if btn.props.popover:
-                btn.props.popover.connect("closed", self._hide_ui_timeout)
+            popover = btn.props.popover
+            popover.connect("closed", self._hide_ui_timeout)
+
+            if btn in (self.primary_menu_button, self.open_menu_button):
+                popover.connect(
+                    "closed",
+                    lambda *_: is_same_playlist(self.mpv.playlist)
+                    and self.mpv.write_watch_later_config(),
+                )
 
         # Somehow because the options menu contains other menus popovers inside,
         # when closing it, contains_pointer from header/controls still returns True,
@@ -770,7 +782,7 @@ class CineWindow(Adw.ApplicationWindow):
         self._show_ui()
         self.chapters_menu_button.popup()
 
-    def on_save_session_and_close(self, *args):
+    def _on_save_session_and_close(self, *args):
         settings.set_boolean("save-session", True)
         save_last_playlist_file(self.mpv)
         self.close()
@@ -1273,6 +1285,9 @@ class CineWindow(Adw.ApplicationWindow):
     def _on_drop(self, _target, value, _x, _y):
         first_file = True
 
+        if is_same_playlist(self.mpv.playlist):
+            self.mpv.write_watch_later_config()
+
         items: list[Gio.File] | list[str] = (
             value.get_files()
             if isinstance(value, Gdk.FileList)
@@ -1631,6 +1646,14 @@ class CineWindow(Adw.ApplicationWindow):
         if not self.hide_icon_indicator:
             self.revealer_icon_indicator.set_reveal_child(True)
             GLib.timeout_add(350, self.revealer_icon_indicator.set_reveal_child, False)
+
+    def do_close_request(self) -> bool:
+        same_playlist = is_same_playlist(self.mpv.playlist)
+        save_pos = settings.get_boolean("save-video-position")
+        if same_playlist or save_pos:
+            self.mpv.write_watch_later_config()
+        self.mpv.quit()
+        return False
 
     def _setup_observers(self):
         @self.mpv.event_callback("start-file")

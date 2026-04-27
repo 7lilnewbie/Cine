@@ -39,7 +39,6 @@ def sync_mpv_with_settings(window):
     player["sub-font"] = settings.get_string("subtitle-font")
     player["slang"] = settings.get_string("subtitle-languages")
     player["alang"] = settings.get_string("audio-languages")
-    player["save-position-on-quit"] = settings.get_boolean("save-video-position")
     player["volume"] = settings.get_int("volume")
     hwdec_enabled = settings.get_boolean("hwdec")
     norm_enabled = settings.get_boolean("normalize-volume")
@@ -197,7 +196,6 @@ class Preferences(Adw.Dialog):
             "thumbnail-preview": self._on_thumb_preview_changed,
             "hwdec": self._on_hwdec_changed,
             "normalize-volume": self._on_norm_volume_changed,
-            "save-video-position": self._on_save_pos_changed,
         }
 
         self._setting_ids = [
@@ -247,9 +245,6 @@ class Preferences(Adw.Dialog):
         elif not self.player.idle_active:
             self.win.thumb_preview.props.visible = True
             self.win.setup_preview_player()
-
-    def _on_save_pos_changed(self, settings, key):
-        self.player["save-position-on-quit"] = settings.get_boolean(key)
 
     def _on_hwdec_changed(self, settings, key):
         hwdec_enabled = settings.get_boolean(key)
