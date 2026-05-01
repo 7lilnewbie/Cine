@@ -38,19 +38,19 @@
 
   <screenshots>
     <screenshot type="default">
-      <image>https://raw.githubusercontent.com/diegopvlk/Cine/65cb73369e923eee2fea2878d9dc0e0d91c91160/screenshots/video.png</image>
+      <image>https://raw.githubusercontent.com/diegopvlk/Cine/eedf30ef798707f391df7904af124def524da8c4/screenshots/video.png</image>
       <caption>Video Playing</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/diegopvlk/Cine/65cb73369e923eee2fea2878d9dc0e0d91c91160/screenshots/preferences.png</image>
-      <caption>Preferences</caption>
-    </screenshot>
-    <screenshot>
-      <image>https://raw.githubusercontent.com/diegopvlk/Cine/65cb73369e923eee2fea2878d9dc0e0d91c91160/screenshots/options.png</image>
+      <image>https://raw.githubusercontent.com/diegopvlk/Cine/eedf30ef798707f391df7904af124def524da8c4/screenshots/options.png</image>
       <caption>Video Options</caption>
     </screenshot>
     <screenshot>
-      <image>https://raw.githubusercontent.com/diegopvlk/Cine/65cb73369e923eee2fea2878d9dc0e0d91c91160/screenshots/window.png</image>
+      <image>https://raw.githubusercontent.com/diegopvlk/Cine/eedf30ef798707f391df7904af124def524da8c4/screenshots/preferences.png</image>
+      <caption>Preferences</caption>
+    </screenshot>
+    <screenshot>
+      <image>https://raw.githubusercontent.com/diegopvlk/Cine/eedf30ef798707f391df7904af124def524da8c4/screenshots/window.png</image>
       <caption>Main Window</caption>
     </screenshot>
   </screenshots>
