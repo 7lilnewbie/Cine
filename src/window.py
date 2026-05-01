@@ -162,7 +162,7 @@ class CineWindow(Adw.ApplicationWindow):
         self.prev_speed: float = 1.0
         self.hide_icon_indicator: bool = True
         self.preview_player: mpv.MPV | None = None
-        self.update_preview_id: int = 0
+        self.late_preview_id: int = 0
         self.local_path: bool = True
         self.last_preview_update: float = 0
         self.last_preview_seek: int = 0
@@ -170,7 +170,7 @@ class CineWindow(Adw.ApplicationWindow):
         self.pressed_keys: set[int] = set()
         self.key_state: Gdk.ModifierType
         self.hide_timeout_id: int = 0
-        self.is_fs = False
+        self.is_fs: bool = False
 
         self.mpv_ctx: mpv.MpvRenderContext
 
@@ -869,11 +869,11 @@ class CineWindow(Adw.ApplicationWindow):
 
         if v_width >= v_height:
             # Horizontal or square
-            width = 200
+            width = 180
             height = int((v_height / v_width) * width)
         else:
             # Vertical
-            height = 200
+            height = 180
             width = int((v_width / v_height) * height)
 
         if self.preview_player is None:
@@ -930,23 +930,22 @@ class CineWindow(Adw.ApplicationWindow):
         )
 
     def _update_video_preview(self):
-        if self.preview_player is None or not self.preview_player.path:
+        if (
+            self.preview_player is None
+            or not self.preview_player.path
+            or self.last_preview_seek == int(self.hover_time)
+        ):
             return
 
-        def seek():
-            if self.last_preview_seek == int(self.hover_time):
-                return
-            self.last_preview_seek = int(self.hover_time)
+        self.last_preview_seek = int(self.hover_time)
 
-            try:
-                if self.preview_player:
-                    self.preview_player.command_async(
-                        "seek", self.hover_time, "absolute+keyframes"
-                    )
-            except:
-                pass
-
-        GLib.idle_add(seek)
+        try:
+            if self.preview_player:
+                self.preview_player.command_async(
+                    "seek", self.hover_time, "absolute+keyframes"
+                )
+        except:
+            pass
 
     def _apply_preview_texture(self, res):
         try:
@@ -966,6 +965,11 @@ class CineWindow(Adw.ApplicationWindow):
             return
 
         self.prev_prog_motion_xy = (x, y)
+
+        if self.late_preview_id > 0:
+            GLib.source_remove(self.late_preview_id)
+
+        self.late_preview_id = GLib.timeout_add(135, self._late_update_preview)
 
         width = self.video_progress_scale.get_width()
         duration = self.video_progress_adjustment.props.upper
@@ -1006,21 +1010,16 @@ class CineWindow(Adw.ApplicationWindow):
         if not settings.get_boolean("thumbnail-preview") or not self.local_path:
             return
 
-        if self.update_preview_id > 0:
-            GLib.source_remove(self.update_preview_id)
-            self.update_preview_id = 0
-
         curr_time = time()
 
         if curr_time - self.last_preview_update > 0.35:
-            self._update_video_preview()
             self.last_preview_update = curr_time
+            GLib.idle_add(self._update_video_preview)
 
-        def late_update_preview():
-            self.update_preview_id = 0
-            self._update_video_preview()
-
-        self.update_preview_id = GLib.timeout_add(70, late_update_preview)
+    def _late_update_preview(self):
+        """Update preview when the cursor is stopped"""
+        self.late_preview_id = 0
+        GLib.idle_add(self._update_video_preview)
 
     def _on_progress_scroll(self, controller, _dx, dy):
         event: Gdk.ScrollEvent = controller.get_current_event()
