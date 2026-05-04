@@ -1048,7 +1048,7 @@ class CineWindow(Adw.ApplicationWindow):
             icon = "cine-volume-low-symbolic"
         elif volume < 66:
             icon = "cine-volume-mid-symbolic"
-        elif volume <= 100:
+        elif volume <= 100.5:
             icon = "cine-volume-max-symbolic"
         else:
             icon = "cine-volume-overamp-symbolic"
