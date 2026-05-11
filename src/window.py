@@ -152,9 +152,7 @@ class CineWindow(Adw.ApplicationWindow):
         self.actions: dict[str, Gio.SimpleAction] = {}
         self.prev_motion_xy: tuple = (0, 0)
         self.prev_prog_motion_xy: tuple = (0, 0)
-        self.volume_update_timer_id: int = 0
         self.inhibit_id: int = 0
-        self.last_seek_scroll_time: float = 0
         self.loaded_path: str
         self.startup: bool = True
         self.click_hold_id: int = 0
