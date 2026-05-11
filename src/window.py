@@ -950,7 +950,7 @@ class CineWindow(Adw.ApplicationWindow):
             self.thumb_preview.props.paintable = Gdk.MemoryTexture.new(
                 res["w"],
                 res["h"],
-                Gdk.MemoryFormat.B8G8R8A8,
+                Gdk.MemoryFormat.B8G8R8X8,
                 GLib.Bytes.new(res["data"]),
                 res["stride"],
             )
