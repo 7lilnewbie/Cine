@@ -155,8 +155,10 @@ class CineWindow(Adw.ApplicationWindow):
         self.inhibit_id: int = 0
         self.loaded_path: str
         self.startup: bool = True
+        self.space_hold_id: int = 0
+        self.space_holding: bool = False
         self.click_hold_id: int = 0
-        self.click_holding = False
+        self.click_holding: bool = False
         self.prev_speed: float = 1.0
         self.hide_icon_indicator: bool = True
         self.preview_player: mpv.MPV | None = None
@@ -1343,8 +1345,28 @@ class CineWindow(Adw.ApplicationWindow):
         else:
             self.unfullscreen()
 
+    def _set_space_holding(self, hold):
+        if hold:
+            if self.click_holding:
+                return
+            self.set_can_target(False)
+            self.space_holding = True
+            self.mpv.pause = False
+            self.prev_speed = cast(float, self.mpv["speed"])
+            new_speed = self.prev_speed * 2
+            self.mpv["speed"] = new_speed
+            self.mpv.show_text(f"{new_speed:g}× ⯈⯈", "100000000")
+            self.space_hold_id = 0
+        else:
+            self.set_can_target(True)
+            if "space" in self.pressed_keys:
+                self.pressed_keys.remove("space")
+                self.mpv["speed"] = self.prev_speed
+                self.mpv.show_text(f"{self.mpv["speed"]:g}×")
+
     def _key_up_keys(self):
         try:
+            self._set_space_holding(False)
             for key in self.pressed_keys:
                 self.mpv.command_async("keyup", key)
         except:
@@ -1352,6 +1374,9 @@ class CineWindow(Adw.ApplicationWindow):
 
     def _on_key_event(self, controller, keyval, _keycode, state, event_type):
         key_name = Gdk.keyval_name(keyval)
+
+        if self.space_holding and event_type == "keyup":
+            self._set_space_holding(False)
 
         if key_name in ("Tab", "ISO_Left_Tab", "Return"):
             self.revealer_ui.set_reveal_child(True)
@@ -1380,6 +1405,28 @@ class CineWindow(Adw.ApplicationWindow):
                 mods.append("shift")
 
         combo = "+".join(mods + [mpv_key])
+
+        if combo == "space":
+            if event_type == "keydown":
+                if "space" in self.pressed_keys:
+                    return True
+
+                self.pressed_keys.add("space")
+
+                self.space_hold_id = GLib.timeout_add(
+                    500, self._set_space_holding, True
+                )
+            elif event_type == "keyup":
+                if self.space_hold_id:
+                    GLib.source_remove(self.space_hold_id)
+
+                if not self.space_holding:
+                    self.mpv.command_async("keypress", "space")
+                    if "space" in self.pressed_keys:
+                        self.pressed_keys.remove("space")
+
+            GLib.idle_add(setattr, self, "space_holding", False)
+            return True
 
         try:
             if event_type == "keydown":
@@ -1420,14 +1467,17 @@ class CineWindow(Adw.ApplicationWindow):
             gesture.set_state(Gtk.EventSequenceState.CLAIMED)
             return
 
-        if button == "MBTN_LEFT" and n_press == 1 and not self.mpv.pause:
+        if button == "MBTN_LEFT" and n_press == 1:
             if self.click_hold_id:
                 GLib.source_remove(self.click_hold_id)
 
             def on_click_hold():
                 self.click_hold_id = 0
                 try:
+                    if self.space_holding:
+                        return
                     self.click_holding = True
+                    self.mpv.pause = False
                     self.prev_speed = cast(float, self.mpv["speed"])
                     new_speed = self.prev_speed * 2
                     self.mpv["speed"] = new_speed
@@ -1435,7 +1485,6 @@ class CineWindow(Adw.ApplicationWindow):
                     gesture.set_state(Gtk.EventSequenceState.CLAIMED)
                 except:
                     pass
-                return False
 
             self.click_hold_id = GLib.timeout_add(500, on_click_hold)
 
