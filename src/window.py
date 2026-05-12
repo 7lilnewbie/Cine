@@ -165,7 +165,7 @@ class CineWindow(Adw.ApplicationWindow):
         self.last_preview_update: float = 0
         self.last_preview_seek: int = 0
         self.error_count: int = 0
-        self.pressed_keys: set[int] = set()
+        self.pressed_keys: set[str] = set()
         self.key_state: Gdk.ModifierType
         self.hide_timeout_id: int = 0
         self.is_fs: bool = False
@@ -375,7 +375,7 @@ class CineWindow(Adw.ApplicationWindow):
 
     def _setup_event_handlers(self):
         key_controller = Gtk.EventControllerKey()
-        key_controller.connect("key-pressed", self._on_key_event, "keypress")
+        key_controller.connect("key-pressed", self._on_key_event, "keydown")
         key_controller.connect("key-released", self._on_key_event, "keyup")
         key_controller.set_propagation_phase(Gtk.PropagationPhase.CAPTURE)
         self.add_controller(key_controller)
@@ -1343,27 +1343,27 @@ class CineWindow(Adw.ApplicationWindow):
         else:
             self.unfullscreen()
 
+    def _key_up_keys(self):
+        try:
+            for key in self.pressed_keys:
+                self.mpv.command_async("keyup", key)
+        except:
+            pass
+
     def _on_key_event(self, controller, keyval, _keycode, state, event_type):
         key_name = Gdk.keyval_name(keyval)
 
-        if event_type == "keyup":
-            self.pressed_keys.discard(keyval)
-            return
-
-        self.pressed_keys.add(keyval)
-
-        if key_name == "Escape":
-            self.mpv.fullscreen = False
-            return
-        elif key_name in ("Tab", "ISO_Left_Tab", "Return"):
+        if key_name in ("Tab", "ISO_Left_Tab", "Return"):
             self.revealer_ui.set_reveal_child(True)
             self._hide_ui_timeout(s=3)
+            self._key_up_keys()
             return
 
         self.key_state = state
         clean_state = state & Gtk.accelerator_get_default_mod_mask()
         accel_name = Gtk.accelerator_name(keyval, clean_state)
         if self.app.get_actions_for_accel(accel_name):
+            self._key_up_keys()
             return
 
         mpv_key = KEY_REMAP.get(key_name, key_name)
@@ -1379,10 +1379,19 @@ class CineWindow(Adw.ApplicationWindow):
             else:
                 mods.append("shift")
 
-        full_combo = "+".join(mods + [mpv_key])
+        combo = "+".join(mods + [mpv_key])
 
         try:
-            self.mpv.command_async(event_type, full_combo)
+            if event_type == "keydown":
+                if combo in self.pressed_keys:
+                    return True
+                self.pressed_keys.add(combo)
+
+            elif event_type == "keyup":
+                if combo in self.pressed_keys:
+                    self.pressed_keys.remove(combo)
+
+            self.mpv.command_async(event_type, combo)
             return True
         except:
             pass

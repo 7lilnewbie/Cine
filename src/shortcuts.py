@@ -33,18 +33,20 @@ WHEEL_DOWN       no-osd add volume -5; show-text "{_("Volume")}: ${{volume}}%"
 k                cycle pause; #{_("Play/Pause")}
 p                cycle pause; #{_("Play/Pause")}
 SPACE            cycle pause; #{_("Play/Pause")}
-c                no-osd cycle sub-visibility; no-osd set user-data/show-icon "yes" #{_("Show/Hide Subtitles")}
-z                cycle sub; show-text "{_("Subtitles")}: ${{sub}}" #{_("Switch to Next Subtitle Track")}
-Z                cycle sub down; show-text "{_("Subtitles")}: ${{sub}}" #{_("Switch to Previous Subtitle Track")}
-ctrl+z           cycle secondary-sid; show-text "{_("Secondary Subtitles")}: ${{secondary-sid}}"; #{_("Switch Secondary Subtitle Track")}
-a                cycle audio; show-text "{_("Audio")}: ${{audio}}" #{_("Switch to Next Audio Track")}
-A                cycle audio down; show-text "{_("Audio")}: ${{audio}}" #{_("Switch to Previous Audio Track")}
+c                nonrepeatable no-osd cycle sub-visibility; no-osd set user-data/show-icon "yes" #{_("Show/Hide Subtitles")}
+z                nonrepeatable cycle sub; show-text "{_("Subtitles")}: ${{sub}}" #{_("Switch to Next Subtitle Track")}
+Z                nonrepeatable cycle sub down; show-text "{_("Subtitles")}: ${{sub}}" #{_("Switch to Previous Subtitle Track")}
+alt+z            nonrepeatable cycle secondary-sid; show-text "{_("Secondary Subtitles")}: ${{secondary-sid}}"; #{_("Switch to Next Secondary Subtitle Track")}
+ctrl+z           nonrepeatable cycle secondary-sid down; show-text "{_("Secondary Subtitles")}: ${{secondary-sid}}"; #{_("Switch to Previous Secondary Subtitle Track")}
+a                nonrepeatable cycle audio; show-text "{_("Audio")}: ${{audio}}" #{_("Switch to Next Audio Track")}
+A                nonrepeatable cycle audio down; show-text "{_("Audio")}: ${{audio}}" #{_("Switch to Previous Audio Track")}
 j                seek -10 exact; show-text "⯇⯇" #{_("Seek 10s Backward")}
 l                seek 10 exact; show-text "⯈⯈" #{_("Seek 10s Forward")}
 LEFT             seek -5 exact; show-text "⯇⯇" #{_("Seek 5s Backward")}
 RIGHT            seek 5 exact; show-text "⯈⯈" #{_("Seek 5s Forward")}
 F11              cycle fullscreen; #{_("Fullscreen")}
 f                cycle fullscreen; #{_("Fullscreen")}
+ESC              set fullscreen no; #{_("Exit Fullscreen")}
 MBTN_LEFT_DBL    cycle fullscreen
 MBTN_MID         cycle fullscreen
 MBTN_RIGHT       cycle pause
@@ -65,7 +67,7 @@ PGUP             add sub-pos -1; show-text "{_("Subtitle Position")}: ${{sub-pos
 PGDWN            add sub-pos +1; show-text "{_("Subtitle Position")}: ${{sub-pos}}" #{_("Move Subtitles Down")}
 G                add sub-scale +0.05; show-text "{_("Subtitle Scale")}: ${{sub-scale}}" #{_("Increase Subtitle Scale")}
 F                add sub-scale -0.05; show-text "{_("Subtitle Scale")}: ${{sub-scale}}" #{_("Decrease Subtitle Scale")}
-m                no-osd cycle mute; no-osd set user-data/show-icon "yes" #{_("Mute/Unmute")}
+m                nonrepeatable no-osd cycle mute; no-osd set user-data/show-icon "yes" #{_("Mute/Unmute")}
 ctrl+-           add audio-delay -0.1; show-text "{_("Audio Delay")}: ${{audio-delay}}" #{_("Decrease Audio Delay")}
 ctrl+=           add audio-delay 0.1; show-text "{_("Audio Delay")}: ${{audio-delay}}" #{_("Increase Audio Delay")}
 ctrl++           add audio-delay 0.1; show-text "{_("Audio Delay")}: ${{audio-delay}}" #{_("Increase Audio Delay")}
@@ -78,8 +80,8 @@ FORWARD          seek 60
 REWIND           seek -60
 NEXT             playlist-next
 PREV             playlist-prev
-ctrl+[           frame-step -1 seek #{_("Go Back One Frame")}
-ctrl+]           frame-step 1 seek #{_("Advance One Frame")}
+ctrl+[           frame-step -1 seek; show-text "⯇⯇" #{_("Go Back One Frame")}
+ctrl+]           frame-step 1 seek; show-text "⯈⯈" #{_("Advance One Frame")}
 Ctrl+LEFT        add chapter -1 #{_("Seek to the Previous Chapter")}
 Ctrl+RIGHT       add chapter 1 #{_("Seek to the Next Chapter")}
 VOLUME_UP        no-osd add volume 5; show-text "{_("Volume")}: ${{volume}}%"
