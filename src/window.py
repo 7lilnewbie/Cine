@@ -1357,8 +1357,15 @@ class CineWindow(Adw.ApplicationWindow):
             self.space_hold_id = 0
             if self.click_holding:
                 return
+
+            # prevent being able to open menus when clicking buttons while holding spacebar
+            # because that causes issues with the internal gtk button handling (space activates it)
+            # and it becomes impossible to activate anything again in the window with mouse clicks
+            # unless a menu popover is opened again (with keyboard enter)
             self.set_can_target(False)
+
             self.space_holding = True
+
             try:
                 self.mpv.pause = False
                 self.prev_speed = cast(float, self.mpv["speed"])
