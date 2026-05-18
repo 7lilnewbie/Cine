@@ -19,7 +19,7 @@
 
 import os
 import gi
-from .utils import LAST_PLAYLIST_FILE
+from .utils import LAST_PLAYLIST_FILE, is_local_path
 
 gi.require_version("GLib", "2.0")
 from gi.repository import GLib
@@ -33,8 +33,17 @@ def save_last_playlist_file(win_mpv):
         with open(LAST_PLAYLIST_FILE, "w", encoding="utf-8") as f:
             f.write("#EXTM3U\n")
             for item in win_mpv.playlist:
-                filename = item.get("filename")
-                f.write(f"{filename}\n")
+                path = item.get("filename")
+                name_with_ext = os.path.basename(path)
+                file_title = os.path.splitext(name_with_ext)[0]
+                title = file_title
+
+                if not is_local_path(path):
+                    title = item.get("title") or file_title
+
+                f.write(f"#EXTINF:{-1},{title}\n")
+                f.write(f"{path}\n")
+
     except Exception as e:
         print(f"Error saving last playlist file: {e}")
 
@@ -56,9 +65,7 @@ def is_same_playlist(mpv_playlist):
     try:
         with open(LAST_PLAYLIST_FILE, "r", encoding="utf-8") as f:
             saved_filenames = [
-                line.strip()
-                for line in f
-                if line.strip() and not line.startswith("#EXTM3U")
+                line.strip() for line in f if line.strip() and not line.startswith("#")
             ]
 
         curr_filenames = [item.get("filename") for item in mpv_playlist]
