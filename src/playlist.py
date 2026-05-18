@@ -30,9 +30,8 @@ gi.require_version("GObject", "2.0")
 gi.require_version("Pango", "1.0")
 from gi.repository import Adw, Gio, Gdk, GLib, Gtk, GObject, Pango
 from gettext import gettext as _
+from gettext import ngettext
 from .utils import is_local_path
-
-os.environ["GTK_DEBUG"] = "no-interactive"
 
 
 class PlaylistItemObj(GObject.Object):
@@ -53,6 +52,7 @@ class PlaylistItemObj(GObject.Object):
 class Playlist(Adw.Dialog):
     __gtype_name__ = "Playlist"
 
+    title_widget: Adw.WindowTitle = Gtk.Template.Child()
     toast_overlay: Adw.ToastOverlay = Gtk.Template.Child()
     spinner: Adw.Spinner = Gtk.Template.Child()
     playlist_clamp: Adw.Clamp = Gtk.Template.Child()
@@ -71,6 +71,7 @@ class Playlist(Adw.Dialog):
         self.mpv = window.mpv
 
         self.set_content_height(window.get_height())
+        self._set_item_count()
 
         list_filter = Gtk.CustomFilter()
         list_filter_model = Gtk.FilterListModel(
@@ -100,6 +101,7 @@ class Playlist(Adw.Dialog):
                     return True
 
             list_filter.set_filter_func(filter_func)
+            self._set_item_count(list_amt=list_filter_model.get_n_items())
 
         self.search_entry.connect("search-changed", search_filter)
         self.search_entry.set_placeholder_text(_("Search") + "…")
@@ -251,7 +253,7 @@ class Playlist(Adw.Dialog):
 
     def _on_factory_bind(self, _factory, list_item):
         obj = list_item.get_item()
-        item = list_item.get_item().item
+        item = obj.item
         row = list_item.get_child()
 
         path = item.get("filename")
@@ -491,6 +493,11 @@ class Playlist(Adw.Dialog):
                 print(f"Save playlist error: {e}")
 
         dialog.save(self.win, None, on_save)
+
+    def _set_item_count(self, *args, list_amt=None):
+        count = list_amt if list_amt is not None else self.mpv.playlist_count
+        amt_label = ngettext("{n} item", "{n} items", count).format(n=count)
+        self.title_widget.set_subtitle(f"{amt_label}")
 
     def _write_m3u_file(self, mpv, path):
         with open(path, "w", encoding="utf-8") as f:

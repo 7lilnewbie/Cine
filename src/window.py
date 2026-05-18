@@ -1747,6 +1747,7 @@ class CineWindow(Adw.ApplicationWindow):
 
         if isinstance(dialog := self.get_visible_dialog(), Playlist):
             dialog._set_save_btn_playlist()
+            dialog._set_item_count()
 
         self.playlistLS.splice(0, self.playlistLS.get_n_items(), new_items)
 

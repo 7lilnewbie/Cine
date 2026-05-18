@@ -2,7 +2,6 @@ using Gtk 4.0;
 using Adw 1;
 
 template $Playlist: Adw.Dialog {
-	title: _("Playlist");
 	content-width: 610;
 	presentation-mode: bottom_sheet;
 	name: "playlist";
@@ -17,6 +16,10 @@ template $Playlist: Adw.Dialog {
 			Adw.ToolbarView {
 				[top]
 				Adw.HeaderBar {
+					title-widget: Adw.WindowTitle title_widget {
+						title: _("Playlist");
+					};
+
 					[start]
 					MenuButton {
 						icon-name: "list-add-symbolic";
@@ -80,6 +83,7 @@ template $Playlist: Adw.Dialog {
 				[top]
 				SearchBar search_bar {
 					SearchEntry search_entry {
+						margin-bottom: 6;
 						search-delay: 100;
 						width-request: 276;
 					}
