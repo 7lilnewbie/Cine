@@ -280,7 +280,9 @@ class Playlist(Adw.Dialog):
             icon_name = "cine-folder-symbolic"
             file_title = name_with_ext
             if not os.listdir(path):
-                row.set_opacity(0.5)
+                list_item.icon.set_opacity(0.5)
+                list_item.title_dir.set_opacity(0.5)
+                list_item.title.set_opacity(0.5)
         elif content_type:
             if "video" in content_type:
                 icon_name = "cine-video-x-generic-symbolic"
