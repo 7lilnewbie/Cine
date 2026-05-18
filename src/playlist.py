@@ -26,9 +26,20 @@ gi.require_version("Gdk", "4.0")
 gi.require_version("GLib", "2.0")
 gi.require_version("Gtk", "4.0")
 gi.require_version("GObject", "2.0")
-from gi.repository import Adw, Gio, Gdk, GLib, Gtk, GObject
+gi.require_version("Pango", "1.0")
+from gi.repository import Adw, Gio, Gdk, GLib, Gtk, GObject, Pango
 from gettext import gettext as _
-from .utils import is_local_path, has_host_permission
+from .utils import is_local_path
+
+
+class PlaylistItemObj(GObject.Object):
+    item = GObject.Property(type=object)
+    playing = GObject.Property(type=bool, default=False)
+
+    def __init__(self, item):
+        super().__init__()
+        self.item = item
+        self.playing = item.get("playing", False)
 
 
 @Gtk.Template(resource_path="/io/github/diegopvlk/Cine/playlist.ui")
@@ -38,7 +49,8 @@ class Playlist(Adw.Dialog):
     toast_overlay: Adw.ToastOverlay = Gtk.Template.Child()
     spinner: Adw.Spinner = Gtk.Template.Child()
     playlist_clamp: Adw.Clamp = Gtk.Template.Child()
-    playlist_list_box: Gtk.ListBox = Gtk.Template.Child()
+    playlist_list_view: Gtk.ListView = Gtk.Template.Child()
+    factory: Gtk.SignalListItemFactory = Gtk.Template.Child()
     drop_indicator_revealer: Gtk.Revealer = Gtk.Template.Child()
     save_playlist_btn: Gtk.Button = Gtk.Template.Child()
 
@@ -51,7 +63,13 @@ class Playlist(Adw.Dialog):
 
         self.set_content_height(window.get_height())
 
-        self._populate_list()
+        model = Gtk.NoSelection(model=window.playlistLS)
+        self.playlist_list_view.set_model(model)
+        self.playlist_list_view.remove_css_class("view")
+
+        self.factory.connect("setup", self._on_factory_setup)
+        self.factory.connect("bind", self._on_factory_bind)
+        self.factory.connect("unbind", self._on_factory_unbind)
 
         drop_target = Gtk.DropTarget.new(Gdk.FileList, Gdk.DragAction.COPY)
         drop_target.set_gtypes([Gdk.FileList, GObject.TYPE_STRING])
@@ -59,6 +77,171 @@ class Playlist(Adw.Dialog):
         drop_target.connect("leave", self._on_drop_leave)
         drop_target.connect("drop", self._on_drop)
         self.add_controller(drop_target)
+
+        ls_n_items = window.playlistLS.get_n_items()
+        if (
+            ls_n_items == 0
+            or ls_n_items != self.mpv.playlist_count
+            or (
+                window.last_shuffle
+                != window.playlist_shuffle_toggle_button.props.active
+            )
+        ):
+            window._splice_playlist()
+
+        self._set_save_btn_playlist()
+        self._update_playing_item()
+        GLib.idle_add(
+            self.playlist_list_view.scroll_to,
+            self.mpv.playlist_pos,
+            Gtk.ListScrollFlags.FOCUS,
+        )
+
+    @Gtk.Template.Callback()
+    def _on_list_item_activate(self, _list_view, pos):
+        self.mpv.pause = False
+        self.mpv.playlist_pos = pos
+        self._update_playing_item()
+        self.close()
+
+    def _set_save_btn_playlist(self):
+        btn = self.save_playlist_btn
+        if self.win.has_some_doc_path:
+            btn.set_tooltip_text(
+                _("Save Playlist")
+                + " - "
+                + _(
+                    "Requires flatpak permission to read the folder where the video is stored"
+                )
+            )
+            btn.set_sensitive(False)
+        else:
+            btn.set_tooltip_text(_("Save Playlist"))
+            btn.set_sensitive(True)
+
+    def _update_playing_item(self):
+        for i in range(self.win.playlistLS.get_n_items()):
+            obj = self.win.playlistLS.get_item(i)
+            is_playing = i == self.mpv.playlist_pos
+            if obj.playing != is_playing:
+                obj.playing = is_playing
+
+    def _on_factory_setup(self, _factory, list_item):
+        row = Gtk.Box(height_request=52)
+        list_item.icon = Gtk.Image(margin_start=14)
+        inner_box = Gtk.Box(
+            halign=Gtk.Align.START,
+            margin_top=5,
+            margin_bottom=5,
+            margin_start=12,
+            margin_end=12,
+            orientation=Gtk.Orientation.VERTICAL,
+            hexpand=True,
+            valign=Gtk.Align.CENTER,
+        )
+        list_item.title_dir = Gtk.Label(
+            halign=Gtk.Align.START,
+            ellipsize=Pango.EllipsizeMode.MIDDLE,
+            xalign=0,
+            css_classes=["subtitle"],
+            margin_bottom=3,
+        )
+        list_item.title = Gtk.Label(
+            halign=Gtk.Align.START,
+            ellipsize=Pango.EllipsizeMode.END,
+            xalign=0,
+            css_classes=["title"],
+        )
+        list_item.playing_icon = Gtk.Image(
+            margin_end=14, icon_name="cine-playback-start-symbolic", visible=False
+        )
+        row.append(list_item.icon)
+        inner_box.append(list_item.title_dir)
+        inner_box.append(list_item.title)
+        row.append(inner_box)
+        row.append(list_item.playing_icon)
+        list_item.set_child(row)
+
+    def _on_factory_bind(self, _factory, list_item):
+        obj = list_item.get_item()
+        item = list_item.get_item().item
+        row = list_item.get_child()
+        index = list_item.get_position()
+
+        path = item.get("filename")
+        name_with_ext = os.path.basename(path)
+        parent_dir = os.path.basename(os.path.dirname(path))
+        dir = parent_dir if parent_dir else path
+
+        list_item.title_dir.set_text(dir)
+
+        icon_name = "cine-applications-multimedia-symbolic"
+        file_title = os.path.splitext(name_with_ext)[0]
+
+        if not is_local_path(path):
+            content_type = "mpv-url"
+            file_title = item.get("title") or file_title
+        else:
+            try:
+                info = Gio.File.new_for_path(path).query_info(
+                    "standard::content-type", Gio.FileQueryInfoFlags.NONE, None
+                )
+                content_type = info.get_content_type()
+            except:
+                content_type = "error"
+
+        if content_type == "inode/directory":
+            icon_name = "cine-folder-symbolic"
+            file_title = name_with_ext
+            if not os.listdir(path):
+                row.set_sensitive(False)
+        elif content_type:
+            if "mpegurl" in content_type:
+                icon_name = "cine-playlist-m3u-symbolic"
+            elif "audio" in content_type:
+                icon_name = "cine-audio-x-generic-symbolic"
+            elif "video" in content_type:
+                icon_name = "cine-video-x-generic-symbolic"
+            elif "image" in content_type:
+                icon_name = "cine-image-x-generic-symbolic"
+            elif content_type == "mpv-url":
+                icon_name = "cine-globe-symbolic"
+            elif content_type == "error":
+                icon_name = "cine-warning-symbolic"
+
+        list_item.title.set_text(file_title)
+        list_item.title.set_tooltip_text(file_title)
+        list_item.icon.set_from_icon_name(icon_name)
+
+        def set_playing_item(obj, pspec):
+            list_item.playing_icon.props.visible = obj.playing
+            if obj.playing:
+                row.add_css_class("playing-item-playlist")
+            else:
+                row.remove_css_class("playing-item-playlist")
+
+        set_playing_item(obj, None)
+
+        list_item.handler_id = obj.connect("notify::playing", set_playing_item)
+
+        gesture = Gtk.GestureClick.new()
+        gesture.set_button(3)
+        gesture.connect("pressed", self._on_row_right_click, path, index)
+        row.add_controller(gesture)
+
+        row_drag_source = Gtk.DragSource.new()
+        row_drag_source.set_actions(Gdk.DragAction.MOVE)
+        row_drag_source.connect("prepare", self._on_row_drag_prepare, index)
+        row_drag_source.connect("drag-begin", self._on_row_drag_begin)
+        row.add_controller(row_drag_source)
+
+        row_drop_target = Gtk.DropTarget.new(GObject.TYPE_INT, Gdk.DragAction.MOVE)
+        row_drop_target.connect("drop", self._on_row_drop, index)
+        row.add_controller(row_drop_target)
+
+    def _on_factory_unbind(self, _factory, list_item):
+        obj = list_item.get_item()
+        obj.disconnect(list_item.handler_id)
 
     def _on_drop_enter(self, target, _x, _y):
         GLib.timeout_add(10, self.drop_indicator_revealer.set_reveal_child, True)
@@ -96,8 +279,7 @@ class Playlist(Adw.Dialog):
             if isinstance(item, Gio.File):
                 path = item.get_path() or item.get_uri()
 
-                # URL Thumbnail
-                is_url = not is_local_path(path)
+                is_url = not is_local_path(path)  # URL Thumbnail
 
                 if is_url:
                     self.mpv.loadfile(path, "append-play")
@@ -129,96 +311,7 @@ class Playlist(Adw.Dialog):
             elif isinstance(item, str):  # URL string
                 self.mpv.loadfile(item, "append-play")
 
-        self._populate_list()
         self.spinner.set_visible(False)
-
-    def _populate_list(self, row_idx=None):
-        self.playlist_list_box.remove_all()
-        playlist = self.mpv.playlist
-
-        for index, item in enumerate(playlist):
-            path = item.get("filename")
-
-            if (
-                self.doc_path in path
-                and self.save_playlist_btn.props.sensitive
-                and not has_host_permission
-            ):
-                self.save_playlist_btn.set_tooltip_text(
-                    _("Save Playlist")
-                    + " - "
-                    + _(
-                        "Requires flatpak permission to read the folder where the video is stored"
-                    )
-                )
-                self.save_playlist_btn.set_sensitive(False)
-
-            name_with_ext = os.path.basename(path)
-            parent_dir = os.path.basename(os.path.dirname(path))
-            dir = parent_dir if parent_dir else path
-            dir = GLib.markup_escape_text(dir)
-
-            row = Adw.ActionRow(title=dir)
-            row.add_css_class("property")
-            row.props.activatable = True
-
-            icon_name = "cine-applications-multimedia-symbolic"
-            file_title = os.path.splitext(name_with_ext)[0]
-
-            if not is_local_path(path):
-                content_type = "mpv-url"
-                file_title = item.get("title") or file_title
-            else:
-                try:
-                    info = Gio.File.new_for_path(path).query_info(
-                        "standard::content-type", Gio.FileQueryInfoFlags.NONE, None
-                    )
-                    content_type = info.get_content_type()
-                except:
-                    content_type = "error"
-
-            if content_type == "inode/directory":
-                icon_name = "cine-folder-symbolic"
-                file_title = name_with_ext
-                if not os.listdir(path):
-                    row.set_sensitive(False)
-            elif content_type:
-                if "mpegurl" in content_type:
-                    icon_name = "cine-playlist-m3u-symbolic"
-                elif "audio" in content_type:
-                    icon_name = "cine-audio-x-generic-symbolic"
-                elif "video" in content_type:
-                    icon_name = "cine-video-x-generic-symbolic"
-                elif "image" in content_type:
-                    icon_name = "cine-image-x-generic-symbolic"
-                elif content_type == "mpv-url":
-                    icon_name = "cine-globe-symbolic"
-                elif content_type == "error":
-                    icon_name = "cine-warning-symbolic"
-
-            file_title = GLib.markup_escape_text(file_title)
-            row.set_subtitle(file_title)
-            row.set_icon_name(icon_name)
-            row.connect("activated", self._on_file_activated, index)
-
-            gesture = Gtk.GestureClick.new()
-            gesture.set_button(3)
-            gesture.connect("pressed", self._on_row_right_click, path)
-            row.add_controller(gesture)
-
-            row_drag_source = Gtk.DragSource.new()
-            row_drag_source.set_actions(Gdk.DragAction.MOVE)
-            row_drag_source.connect("prepare", self._on_row_drag_prepare, index)
-            row_drag_source.connect("drag-begin", self._on_row_drag_begin)
-            row.add_controller(row_drag_source)
-
-            row_drop_target = Gtk.DropTarget.new(GObject.TYPE_INT, Gdk.DragAction.MOVE)
-            row_drop_target.connect("drop", self._on_row_drop, index)
-            row.add_controller(row_drop_target)
-
-            self.playlist_list_box.append(row)
-
-        GLib.idle_add(self._scroll_to_playing, row_idx)
 
     def _on_row_drag_prepare(self, _source, _x, _y, index):
         return Gdk.ContentProvider.new_for_value(index)
@@ -235,9 +328,9 @@ class Playlist(Adw.Dialog):
         else:
             self.mpv.command("playlist-move", source_index, dest_index)
 
-        self._populate_list(dest_index)
+        self.win._splice_playlist()
 
-    def _on_row_right_click(self, gesture, _n_press, x, y, path):
+    def _on_row_right_click(self, gesture, _n_press, x, y, path, idx):
         def show_in_folder():
             gfile = Gio.File.new_for_path(path)
             launcher = Gtk.FileLauncher.new(gfile)
@@ -250,15 +343,15 @@ class Playlist(Adw.Dialog):
                 print(f"Error opening location: {e}")
 
         def remove_from_playlist(index):
+            if index > 0 and index == self.mpv.playlist_count - 1:
+                self.mpv.playlist_pos = index - 1
             self.mpv.command("playlist-remove", index)
-            self._populate_list(index)
 
         menu = Gio.Menu.new()
         menu.append(_("Open Item Location"), "row.open_location")
         menu.append(_("Remove from Playlist"), "row.remove_item")
 
         row = gesture.get_widget()
-        index = row.get_index()
 
         popover = Gtk.PopoverMenu.new_from_model(menu)
         popover.set_parent(row)
@@ -274,7 +367,7 @@ class Playlist(Adw.Dialog):
             action_group.add_action(open_location)
 
         remove_item = Gio.SimpleAction.new("remove_item", None)
-        remove_item.connect("activate", lambda *_: remove_from_playlist(index))
+        remove_item.connect("activate", lambda *_: remove_from_playlist(idx))
         action_group.add_action(remove_item)
 
         row.insert_action_group("row", action_group)
@@ -284,38 +377,6 @@ class Playlist(Adw.Dialog):
         rect.y = y
         popover.set_pointing_to(rect)
         GLib.idle_add(popover.popup)
-
-    def _scroll_to_playing(self, idx=None):
-        if hasattr(self, "curr_playing_row") and self.curr_playing_row:
-            self.curr_playing_row.remove_css_class("playing-item-playlist")
-
-        if not hasattr(self, "playing_icon") or not self.playing_icon:
-            self.playing_icon = Gtk.Image.new_from_icon_name(
-                "cine-playback-start-symbolic"
-            )
-
-        parent = self.playing_icon.get_parent()
-        if isinstance(parent, (Gtk.Box, Adw.ActionRow)):
-            parent.remove(self.playing_icon)
-
-        current_pos = self.mpv.playlist_pos
-        new_row = self.playlist_list_box.get_row_at_index(current_pos)
-
-        if isinstance(new_row, (Gtk.Box, Adw.ActionRow)):
-            if idx is None:
-                new_row.grab_focus()
-            elif row := self.playlist_list_box.get_row_at_index(max(0, idx - 1)):
-                row.grab_focus()
-
-            new_row.add_css_class("playing-item-playlist")
-            new_row.add_suffix(self.playing_icon)
-
-            self.curr_playing_row = new_row
-
-    def _on_file_activated(self, _row, index):
-        self.mpv.playlist_pos = index
-        self.mpv.pause = False
-        self.close()
 
     @Gtk.Template.Callback()
     def _on_add_playlist_files(self, _button):

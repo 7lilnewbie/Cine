@@ -38,6 +38,7 @@ from .utils import (
     is_local_path,
     get_gpu_vendor,
     format_time,
+    has_host_permission,
     MBTN_MAP,
     KEY_REMAP,
     SUB_EXTS,
@@ -49,7 +50,7 @@ from .utils import (
 DEFAULT_WIDTH, DEFAULT_HEIGHT = 1120, 630
 
 from .options import OptionsMenuButton
-from .playlist import Playlist
+from .playlist import Playlist, PlaylistItemObj
 from .preferences import settings, sync_mpv_with_settings
 from .shortcuts import INTERNAL_BINDINGS, populate_shortcuts_dialog_mpv
 
@@ -146,6 +147,10 @@ class CineWindow(Adw.ApplicationWindow):
 
         self.video_overlay.set_child(self.offload)
 
+        self.playlistLS: Gio.ListStore = Gio.ListStore.new(PlaylistItemObj)
+        self.playlist_debounce_id: int = 0
+        self.last_shuffle: bool = False
+        self.has_some_doc_path: bool = False
         self.can_go_prev: bool = False
         self.can_go_next: bool = False
         self.current_chapters: list = []
@@ -171,7 +176,6 @@ class CineWindow(Adw.ApplicationWindow):
         self.key_state: Gdk.ModifierType
         self.hide_timeout_id: int = 0
         self.is_fs: bool = False
-
         self.mpv_ctx: mpv.MpvRenderContext
 
         self.mpv = mpv.MPV(
@@ -680,11 +684,6 @@ class CineWindow(Adw.ApplicationWindow):
 
                 path = folder.get_path()
                 self.mpv.loadfile(path, "append-play")
-                GLib.idle_add(
-                    lambda *a: self._on_shuffle_toggled(
-                        self.playlist_shuffle_toggle_button
-                    )
-                )
 
             except GLib.Error as e:
                 print(f"Dialog error: {e.message}")
@@ -761,17 +760,11 @@ class CineWindow(Adw.ApplicationWindow):
 
             if from_playlist:
                 playlist_dialog = cast(Playlist, self.get_visible_dialog())
-                playlist_dialog._populate_list()
                 playlist_dialog.spinner.set_visible(False)
-
-            GLib.idle_add(
-                lambda *a: self._on_shuffle_toggled(self.playlist_shuffle_toggle_button)
-            )
 
         except GLib.Error as e:
             if from_playlist:
                 playlist_dialog = cast(Playlist, self.get_visible_dialog())
-                playlist_dialog._populate_list()
                 playlist_dialog.spinner.set_visible(False)
             print(f"Dialog error: {e.message}")
 
@@ -852,9 +845,6 @@ class CineWindow(Adw.ApplicationWindow):
         def open_url(*args):
             self.mpv.loadfile(self.url, mode)
             dialog.close()
-            if dialog_p := cast(Playlist, self.get_visible_dialog()):
-                if dialog_p.props.name == "playlist":
-                    dialog_p._populate_list()
 
         btn_open.connect("clicked", open_url)
         dialog.present(self)
@@ -1205,10 +1195,10 @@ class CineWindow(Adw.ApplicationWindow):
             self.mpv.command("playlist-shuffle")
         else:
             self.mpv.command("playlist-unshuffle")
+        self.last_shuffle = not button.props.active
 
-        if dialog := cast(Playlist, self.get_visible_dialog()):
-            if dialog.props.name == "playlist":
-                dialog._populate_list()
+        if isinstance(self.get_visible_dialog(), Playlist):
+            GLib.idle_add(self._splice_playlist)
 
     def _on_loop_playlist_toggled(self, button):
         if button.props.active:
@@ -1341,9 +1331,6 @@ class CineWindow(Adw.ApplicationWindow):
             elif isinstance(item, str):  # URL string
                 self.mpv.loadfile(item, mode)
                 first_file = False
-        GLib.idle_add(
-            lambda *a: self._on_shuffle_toggled(self.playlist_shuffle_toggle_button)
-        )
 
     def _sync_fullscreen(self, mpv_is_fs):
         self.is_fs = mpv_is_fs
@@ -1735,6 +1722,27 @@ class CineWindow(Adw.ApplicationWindow):
         self.mpv.quit()
         return False
 
+    def _splice_playlist(self):
+        self.last_shuffle = self.playlist_shuffle_toggle_button.props.active
+        self.playlist_debounce_id = 0
+        self.has_some_doc_path = False
+        new_items = []
+        for item in cast(list, self.mpv.playlist):
+            new_items.append(PlaylistItemObj(item))
+
+            if (
+                self.has_some_doc_path
+                or f"/run/user/{os.getuid()}/doc/" not in item.get("filename")
+                or has_host_permission
+            ):
+                continue
+            self.has_some_doc_path = True
+
+        if isinstance(dialog := self.get_visible_dialog(), Playlist):
+            dialog._set_save_btn_playlist()
+
+        self.playlistLS.splice(0, self.playlistLS.get_n_items(), new_items)
+
     def _setup_observers(self):
         @self.mpv.event_callback("start-file")
         def on_start_file(event):
@@ -1793,7 +1801,17 @@ class CineWindow(Adw.ApplicationWindow):
 
         @self.mpv.property_observer("playlist-count")
         def on_playlist_count_change(_name, _count):
+            if isinstance(self.get_visible_dialog(), Playlist):
+                if self.playlist_debounce_id > 0:
+                    GLib.source_remove(self.playlist_debounce_id)
+                    self.playlist_debounce_id = 0
+                self.playlist_debounce_id = GLib.timeout_add(50, self._splice_playlist)
             GLib.idle_add(self._update_playlist_nav_sensitivity)
+
+        @self.mpv.property_observer("playlist-pos")
+        def on_playlist_pos_changed(name, value):
+            if isinstance(dialog := self.get_visible_dialog(), Playlist):
+                GLib.idle_add(dialog._update_playing_item)
 
         @self.mpv.property_observer("loop-playlist")
         def on_loop_playlist_change(_name, value):
@@ -1898,8 +1916,6 @@ class CineWindow(Adw.ApplicationWindow):
         def on_pl_pos_change(_name, _value):
             def update():
                 self._update_playlist_nav_sensitivity()
-                if dialog := cast(Playlist, self.get_visible_dialog()):
-                    dialog._scroll_to_playing()
 
             GLib.idle_add(update)
 
@@ -1942,9 +1958,8 @@ class CineWindow(Adw.ApplicationWindow):
                     self.revealer_ui.set_reveal_child(True)
                     self.set_title("")
                     self.hide_icon_indicator = True
-                    if dialog := self.get_visible_dialog():
-                        if dialog.props.name == "playlist":
-                            dialog.close()
+                    if isinstance(dialog := self.get_visible_dialog(), Playlist):
+                        dialog.close()
 
                 self._sync_inhibit()
 

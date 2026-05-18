@@ -157,13 +157,6 @@ statuspage box {
   margin-top: 0px;
 }
 
-.playing-item-playlist {
-  background-color: rgb(from var(--accent-color) r g b / calc(alpha * 0.16));
-}
-.playing-item-playlist:hover {
-  background-color: rgb(from var(--accent-color) r g b / calc(alpha * 0.21));
-}
-
 #options spinbutton {
   background: none;
   outline: none;
@@ -203,6 +196,45 @@ statuspage box {
   min-height: 22px;
 }
 
+.playlist-list-view {
+  background: transparent;
+  padding-bottom: 22px;
+}
+.playlist-list-view row {
+  border-color: rgba(0, 0, 0, 0.6);
+  transition: all 200ms ease-in-out;
+  background: rgba(255, 255, 255, 0.12);
+  margin-right: 12px;
+  margin-left: 12px;
+  padding: 0;
+}
+.playlist-list-view row:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.playlist-list-view row:active {
+  background: rgba(255, 255, 255, 0.28);
+}
+.playlist-list-view row:first-child,
+.playlist-list-view row:first-child box {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+.playlist-list-view row:last-child,
+.playlist-list-view row:last-child box {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.playing-item-playlist {
+  background-color: rgb(from var(--accent-color) r g b / calc(alpha * 0.25));
+}
+.playing-item-playlist:hover {
+  background-color: rgb(from var(--accent-color) r g b / calc(alpha * 0.3));
+}
+.playing-item-playlist:active {
+  background-color: rgb(from var(--accent-color) r g b / calc(alpha * 0.35));
+}
+
 @media (prefers-contrast: more) {
   .osd popover:not(.chapter-popover) > contents,
   .osd popover > arrow,
@@ -226,5 +258,12 @@ statuspage box {
         rgba(0, 0, 0, 0.46) 10%,
         rgba(0, 0, 0, 0) 35%
       );
+  }
+  .playlist-list-view row {
+    border: 1px solid var(--border-color);
+    border-bottom: none;
+  }
+  .playlist-list-view row:last-child {
+    border-bottom: 1px solid var(--border-color);
   }
 }

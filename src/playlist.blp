@@ -3,7 +3,7 @@ using Adw 1;
 
 template $Playlist: Adw.Dialog {
 	title: _("Playlist");
-	content-width: 600;
+	content-width: 610;
 	presentation-mode: bottom_sheet;
 	name: "playlist";
 
@@ -50,19 +50,19 @@ template $Playlist: Adw.Dialog {
 				}
 
 				content: ScrolledWindow {
-					Adw.Clamp playlist_clamp {
-						ListBox playlist_list_box {
-							hexpand: true;
-							valign: start;
-							activate-on-single-click: true;
-							selection-mode: none;
-							margin-top: 2;
-							margin-end: 10;
-							margin-start: 10;
-							margin-bottom: 20;
+					Adw.ClampScrollable playlist_clamp {
+						maximum-size: 650;
+
+						ListView playlist_list_view {
+							single-click-activate: true;
+							show-separators: true;
+							activate => $_on_list_item_activate();
+
+							factory: SignalListItemFactory factory {};
 
 							styles [
-								"boxed-list",
+								"playlist-list-view",
+								"osd",
 							]
 						}
 					}
