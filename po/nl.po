@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-20 23:23-0300\n"
+"POT-Creation-Date: 2026-05-21 12:14-0300\n"
 "PO-Revision-Date: 2026-02-28 11:40-0300\n"
 "Last-Translator: Heimen Stoffels <vistausss@fastmail.com>\n"
 "Language-Team: \n"
@@ -119,7 +119,7 @@ msgstr ""
 "Hiervoor is vereist dat Flatpak toegang heeft tot de map waarin de video is "
 "opgeslagen"
 
-#: src/playlist.py:332 src/window.py:1270 src/window.py:1794
+#: src/playlist.py:332 src/window.py:1267 src/window.py:1791
 msgid "File Error"
 msgstr "Bestandsfout"
 
@@ -152,7 +152,7 @@ msgstr "Ondertitelachtergrond"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:87 src/shortcuts.py:88
-#: src/window.py:1888 src/window.blp:228
+#: src/window.py:1885 src/window.blp:228
 msgid "Volume"
 msgstr "Volumeniveau"
 
@@ -226,12 +226,12 @@ msgstr "5 sec. terugspoelen"
 msgid "Seek 5s Forward"
 msgstr "5 sec. vooruitspoelen"
 
-#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1837
+#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1834
 #: src/window.blp:382
 msgid "Fullscreen"
 msgstr "Schermvullende weergave"
 
-#: src/shortcuts.py:49 src/window.py:1837
+#: src/shortcuts.py:49 src/window.py:1834
 msgid "Exit Fullscreen"
 msgstr "Schermvullende weergave verlaten"
 
@@ -435,7 +435,7 @@ msgstr "Afspelen"
 msgid "Miscellaneous"
 msgstr "Overig"
 
-#: src/window.py:575 src/window.py:1262 src/window.blp:115
+#: src/window.py:575 src/window.py:1259 src/window.blp:115
 msgid "Add Subtitle Track"
 msgstr "Ondertitelspoor toevoegen"
 
@@ -505,15 +505,15 @@ msgstr "Toevoegen"
 msgid "Open"
 msgstr "Openen"
 
-#: src/window.py:996 src/window.py:1104
+#: src/window.py:993 src/window.py:1101
 msgid "Chapter"
 msgstr "Hoofdstuk"
 
-#: src/window.py:1160 src/window.py:1266
+#: src/window.py:1157 src/window.py:1263
 msgid "Play"
 msgstr "Afspelen"
 
-#: src/window.py:1160
+#: src/window.py:1157
 msgid "Pause"
 msgstr "Pauzeren"
 

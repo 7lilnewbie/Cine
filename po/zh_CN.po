@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-20 23:23-0300\n"
+"POT-Creation-Date: 2026-05-21 12:14-0300\n"
 "PO-Revision-Date: 2026-05-03 13:33+0000\n"
 "Last-Translator: Diego Povliuk <diego.pvlk@gmail.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -110,7 +110,7 @@ msgid ""
 "Requires flatpak permission to read the folder where the video is stored"
 msgstr "需要flatpak权限才能读取存储视频的文件夹"
 
-#: src/playlist.py:332 src/window.py:1270 src/window.py:1794
+#: src/playlist.py:332 src/window.py:1267 src/window.py:1791
 msgid "File Error"
 msgstr "文件错误"
 
@@ -142,7 +142,7 @@ msgstr "字幕背景"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:87 src/shortcuts.py:88
-#: src/window.py:1888 src/window.blp:228
+#: src/window.py:1885 src/window.blp:228
 msgid "Volume"
 msgstr "音量"
 
@@ -216,12 +216,12 @@ msgstr "后退 5 秒"
 msgid "Seek 5s Forward"
 msgstr "前进 5 秒"
 
-#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1837
+#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1834
 #: src/window.blp:382
 msgid "Fullscreen"
 msgstr "全屏"
 
-#: src/shortcuts.py:49 src/window.py:1837
+#: src/shortcuts.py:49 src/window.py:1834
 msgid "Exit Fullscreen"
 msgstr "退出全屏"
 
@@ -425,7 +425,7 @@ msgstr "回放"
 msgid "Miscellaneous"
 msgstr "杂项"
 
-#: src/window.py:575 src/window.py:1262 src/window.blp:115
+#: src/window.py:575 src/window.py:1259 src/window.blp:115
 msgid "Add Subtitle Track"
 msgstr "添加字幕轨道"
 
@@ -495,15 +495,15 @@ msgstr "添加"
 msgid "Open"
 msgstr "打开"
 
-#: src/window.py:996 src/window.py:1104
+#: src/window.py:993 src/window.py:1101
 msgid "Chapter"
 msgstr "章节"
 
-#: src/window.py:1160 src/window.py:1266
+#: src/window.py:1157 src/window.py:1263
 msgid "Play"
 msgstr "播放"
 
-#: src/window.py:1160
+#: src/window.py:1157
 msgid "Pause"
 msgstr "暂停"
 

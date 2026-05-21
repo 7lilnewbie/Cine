@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-20 23:23-0300\n"
+"POT-Creation-Date: 2026-05-21 12:14-0300\n"
 "PO-Revision-Date: 2026-02-28 11:40-0300\n"
 "Last-Translator: Sabri Ünal <yakushabb@gmail.com>\n"
 "Language-Team: Turkish <takim@gnome.org.tr>\n"
@@ -117,7 +117,7 @@ msgid ""
 "Requires flatpak permission to read the folder where the video is stored"
 msgstr "Videonun saklandığı klasörü okumak için flatpak izni gerektirir"
 
-#: src/playlist.py:332 src/window.py:1270 src/window.py:1794
+#: src/playlist.py:332 src/window.py:1267 src/window.py:1791
 msgid "File Error"
 msgstr "Dosya Hatası"
 
@@ -149,7 +149,7 @@ msgstr "Alt Yazı Arka Planı"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:87 src/shortcuts.py:88
-#: src/window.py:1888 src/window.blp:228
+#: src/window.py:1885 src/window.blp:228
 msgid "Volume"
 msgstr "Ses"
 
@@ -223,12 +223,12 @@ msgstr "5 sn Geri Sar"
 msgid "Seek 5s Forward"
 msgstr "5 sn İleri Sar"
 
-#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1837
+#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1834
 #: src/window.blp:382
 msgid "Fullscreen"
 msgstr "Tam Ekran"
 
-#: src/shortcuts.py:49 src/window.py:1837
+#: src/shortcuts.py:49 src/window.py:1834
 msgid "Exit Fullscreen"
 msgstr "Tam Ekrandan Çık"
 
@@ -432,7 +432,7 @@ msgstr "Oynatma"
 msgid "Miscellaneous"
 msgstr "Çeşitli"
 
-#: src/window.py:575 src/window.py:1262 src/window.blp:115
+#: src/window.py:575 src/window.py:1259 src/window.blp:115
 msgid "Add Subtitle Track"
 msgstr "Alt Yazı Parçası Ekle"
 
@@ -502,15 +502,15 @@ msgstr "Ekle"
 msgid "Open"
 msgstr "Aç"
 
-#: src/window.py:996 src/window.py:1104
+#: src/window.py:993 src/window.py:1101
 msgid "Chapter"
 msgstr "Bölüme"
 
-#: src/window.py:1160 src/window.py:1266
+#: src/window.py:1157 src/window.py:1263
 msgid "Play"
 msgstr "Oynat"
 
-#: src/window.py:1160
+#: src/window.py:1157
 msgid "Pause"
 msgstr "Duraklat"
 

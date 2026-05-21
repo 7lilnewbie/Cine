@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-20 23:23-0300\n"
+"POT-Creation-Date: 2026-05-21 12:14-0300\n"
 "PO-Revision-Date: 2026-04-08 23:12+0000\n"
 "Last-Translator: Diego Povliuk <diego.pvlk@gmail.com>\n"
 "Language-Team: Occitan <https://hosted.weblate.org/projects/cine/app/oc/>\n"
@@ -121,7 +121,7 @@ msgstr ""
 "Necessita la permission flatpak per legir lo dorsièr onte la vidèo es "
 "emmagazinada"
 
-#: src/playlist.py:332 src/window.py:1270 src/window.py:1794
+#: src/playlist.py:332 src/window.py:1267 src/window.py:1791
 msgid "File Error"
 msgstr "Error de fichièr"
 
@@ -154,7 +154,7 @@ msgstr "Rèirefons dels sostítols"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:87 src/shortcuts.py:88
-#: src/window.py:1888 src/window.blp:228
+#: src/window.py:1885 src/window.blp:228
 msgid "Volume"
 msgstr "Volum"
 
@@ -228,12 +228,12 @@ msgstr "Recular de 5 segondas"
 msgid "Seek 5s Forward"
 msgstr "Avançar de 5 segondas"
 
-#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1837
+#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1834
 #: src/window.blp:382
 msgid "Fullscreen"
 msgstr "Ecran complèt"
 
-#: src/shortcuts.py:49 src/window.py:1837
+#: src/shortcuts.py:49 src/window.py:1834
 msgid "Exit Fullscreen"
 msgstr "Sortir de l'ecran complèt"
 
@@ -437,7 +437,7 @@ msgstr "Lectura"
 msgid "Miscellaneous"
 msgstr "Divèrs"
 
-#: src/window.py:575 src/window.py:1262 src/window.blp:115
+#: src/window.py:575 src/window.py:1259 src/window.blp:115
 msgid "Add Subtitle Track"
 msgstr "Apondre una pista de sostítol"
 
@@ -507,15 +507,15 @@ msgstr "Apondre"
 msgid "Open"
 msgstr "Dobrir"
 
-#: src/window.py:996 src/window.py:1104
+#: src/window.py:993 src/window.py:1101
 msgid "Chapter"
 msgstr "Capítol"
 
-#: src/window.py:1160 src/window.py:1266
+#: src/window.py:1157 src/window.py:1263
 msgid "Play"
 msgstr "Legir"
 
-#: src/window.py:1160
+#: src/window.py:1157
 msgid "Pause"
 msgstr "Pausa"
 

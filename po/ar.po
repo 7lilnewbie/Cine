@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-20 23:23-0300\n"
+"POT-Creation-Date: 2026-05-21 12:14-0300\n"
 "PO-Revision-Date: 2026-04-23 00:12+0000\n"
 "Last-Translator: Ahmer Jamil Khan <ahmer@khan.am>\n"
 "Language-Team: Arabic <https://hosted.weblate.org/projects/cine/app/ar/>\n"
@@ -116,7 +116,7 @@ msgid ""
 "Requires flatpak permission to read the folder where the video is stored"
 msgstr "يتطلب صلاحية من فلاتباك لقراءة المجلد الذي يتواجد فيه الفيديو"
 
-#: src/playlist.py:332 src/window.py:1270 src/window.py:1794
+#: src/playlist.py:332 src/window.py:1267 src/window.py:1791
 msgid "File Error"
 msgstr "خطأ في الملف"
 
@@ -153,7 +153,7 @@ msgstr "خلفية الترجمة"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:87 src/shortcuts.py:88
-#: src/window.py:1888 src/window.blp:228
+#: src/window.py:1885 src/window.blp:228
 msgid "Volume"
 msgstr "مستوى الصوت"
 
@@ -227,12 +227,12 @@ msgstr "السعي ٥ث للوراء"
 msgid "Seek 5s Forward"
 msgstr "السعي ٥ث للأمام"
 
-#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1837
+#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1834
 #: src/window.blp:382
 msgid "Fullscreen"
 msgstr "ملأ الشاشة"
 
-#: src/shortcuts.py:49 src/window.py:1837
+#: src/shortcuts.py:49 src/window.py:1834
 msgid "Exit Fullscreen"
 msgstr "اُخرج من ملئ الشاشة"
 
@@ -436,7 +436,7 @@ msgstr "التشغيل"
 msgid "Miscellaneous"
 msgstr "المتنوعات"
 
-#: src/window.py:575 src/window.py:1262 src/window.blp:115
+#: src/window.py:575 src/window.py:1259 src/window.blp:115
 msgid "Add Subtitle Track"
 msgstr "اضِف ملف ترجمة"
 
@@ -506,15 +506,15 @@ msgstr "إضافة"
 msgid "Open"
 msgstr "فتح"
 
-#: src/window.py:996 src/window.py:1104
+#: src/window.py:993 src/window.py:1101
 msgid "Chapter"
 msgstr "فصل"
 
-#: src/window.py:1160 src/window.py:1266
+#: src/window.py:1157 src/window.py:1263
 msgid "Play"
 msgstr "شغِّل"
 
-#: src/window.py:1160
+#: src/window.py:1157
 msgid "Pause"
 msgstr "ألبِث"
 
