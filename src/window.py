@@ -1398,8 +1398,9 @@ class CineWindow(Adw.ApplicationWindow):
 
         self.key_state = state
         clean_state = state & Gtk.accelerator_get_default_mod_mask()
-        accel_name = Gtk.accelerator_name(keyval, clean_state)
-        if self.app.get_actions_for_accel(accel_name):
+        accel = Gtk.accelerator_name(keyval, clean_state)
+        shortcuts_accel = "<Shift><Control>question"
+        if self.app.get_actions_for_accel(accel) or accel == shortcuts_accel:
             self._key_up_keys()
             return
 
