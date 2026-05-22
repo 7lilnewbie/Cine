@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-21 12:14-0300\n"
+"POT-Creation-Date: 2026-05-22 09:14-0300\n"
 "PO-Revision-Date: 2026-05-03 13:21+0000\n"
 "Last-Translator: Ahmer Jamil Khan <ahmer@khan.am>\n"
 "Language-Team: Urdu <https://hosted.weblate.org/projects/cine/app/ur/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Weblate 5.17.1\n"
 
 #: data/io.github.diegopvlk.Cine.desktop.in:2 src/main.py:227 src/mpris.py:147
-#: src/mpris.py:365 src/window.py:185 src/window.py:304 src/window.blp:6
+#: src/mpris.py:365 src/window.py:185 src/window.py:303 src/window.blp:6
 #: src/window.blp:461
 msgid "Cine"
 msgstr "سنی"
@@ -117,7 +117,7 @@ msgid ""
 msgstr ""
 "اس فولڈر تک رسائی کے لیے فلیٹ پیک کی اجازت درکار ہے جہاں ویڈیو محفوظ ہے"
 
-#: src/playlist.py:332 src/window.py:1267 src/window.py:1791
+#: src/playlist.py:332 src/window.py:1267 src/window.py:1792
 msgid "File Error"
 msgstr "فائل میں خرابی"
 
@@ -150,7 +150,7 @@ msgstr "سب ٹائٹل پس منظر"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:87 src/shortcuts.py:88
-#: src/window.py:1885 src/window.blp:228
+#: src/window.py:1886 src/window.blp:228
 msgid "Volume"
 msgstr "آواز"
 
@@ -224,12 +224,12 @@ msgstr "5 سیکنڈ پیچھے جائیں"
 msgid "Seek 5s Forward"
 msgstr "5 سیکنڈ آگے بڑھیں"
 
-#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1834
+#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1835
 #: src/window.blp:382
 msgid "Fullscreen"
 msgstr "پوری اسکرین"
 
-#: src/shortcuts.py:49 src/window.py:1834
+#: src/shortcuts.py:49 src/window.py:1835
 msgid "Exit Fullscreen"
 msgstr "فل سکرین سے باہر نکلیں"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-21 12:14-0300\n"
+"POT-Creation-Date: 2026-05-22 09:14-0300\n"
 "PO-Revision-Date: 2026-04-28 06:09+0000\n"
 "Last-Translator: Priit Jõerüüt <jrthwlate@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Estonian <https://hosted.weblate.org/projects/cine/app/et/>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Weblate 5.17.1-dev\n"
 
 #: data/io.github.diegopvlk.Cine.desktop.in:2 src/main.py:227 src/mpris.py:147
-#: src/mpris.py:365 src/window.py:185 src/window.py:304 src/window.blp:6
+#: src/mpris.py:365 src/window.py:185 src/window.py:303 src/window.blp:6
 #: src/window.blp:461
 msgid "Cine"
 msgstr "Cine"
@@ -115,7 +115,7 @@ msgid ""
 "Requires flatpak permission to read the folder where the video is stored"
 msgstr "Eeldab flatpaki õiguse lugemaks kausta, kus video on salvestatud"
 
-#: src/playlist.py:332 src/window.py:1267 src/window.py:1791
+#: src/playlist.py:332 src/window.py:1267 src/window.py:1792
 msgid "File Error"
 msgstr "Failiviga"
 
@@ -148,7 +148,7 @@ msgstr "Subtiitrite taust"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:87 src/shortcuts.py:88
-#: src/window.py:1885 src/window.blp:228
+#: src/window.py:1886 src/window.blp:228
 msgid "Volume"
 msgstr "Helivaljus"
 
@@ -222,12 +222,12 @@ msgstr "Keri 5 sekundit tagasi"
 msgid "Seek 5s Forward"
 msgstr "Keri 5 sekundit edasi"
 
-#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1834
+#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1835
 #: src/window.blp:382
 msgid "Fullscreen"
 msgstr "Täisekraanivaade"
 
-#: src/shortcuts.py:49 src/window.py:1834
+#: src/shortcuts.py:49 src/window.py:1835
 msgid "Exit Fullscreen"
 msgstr "Välju täisekraanivaatest"
 

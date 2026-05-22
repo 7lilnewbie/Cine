@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-21 12:14-0300\n"
+"POT-Creation-Date: 2026-05-22 09:14-0300\n"
 "PO-Revision-Date: 2026-04-03 15:09+0000\n"
 "Last-Translator: Diego Povliuk <diego.pvlk@gmail.com>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/cine/app/pt/"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Weblate 5.17-dev\n"
 
 #: data/io.github.diegopvlk.Cine.desktop.in:2 src/main.py:227 src/mpris.py:147
-#: src/mpris.py:365 src/window.py:185 src/window.py:304 src/window.blp:6
+#: src/mpris.py:365 src/window.py:185 src/window.py:303 src/window.blp:6
 #: src/window.blp:461
 msgid "Cine"
 msgstr "Cine"
@@ -118,7 +118,7 @@ msgid ""
 msgstr ""
 "Requer permissão do flatpak para ler a pasta onde o vídeo está armazenado"
 
-#: src/playlist.py:332 src/window.py:1267 src/window.py:1791
+#: src/playlist.py:332 src/window.py:1267 src/window.py:1792
 msgid "File Error"
 msgstr "Erro no Ficheiro"
 
@@ -151,7 +151,7 @@ msgstr "Fundo da Legendas"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:87 src/shortcuts.py:88
-#: src/window.py:1885 src/window.blp:228
+#: src/window.py:1886 src/window.blp:228
 msgid "Volume"
 msgstr "Volume"
 
@@ -225,12 +225,12 @@ msgstr "Recuar 5s"
 msgid "Seek 5s Forward"
 msgstr "Avançar 5s"
 
-#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1834
+#: src/shortcuts.py:47 src/shortcuts.py:48 src/window.py:1835
 #: src/window.blp:382
 msgid "Fullscreen"
 msgstr "Ecrã Inteiro"
 
-#: src/shortcuts.py:49 src/window.py:1834
+#: src/shortcuts.py:49 src/window.py:1835
 msgid "Exit Fullscreen"
 msgstr "Sair de ecrã inteiro"
 
