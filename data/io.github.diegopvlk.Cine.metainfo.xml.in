@@ -72,7 +72,7 @@
   </requires>
 
   <releases>
-    <release version="1.4.0" date="2026-05-21">
+    <release version="1.4.1" date="2026-05-22">
       <description translate="no">
         <ul>
           <li>New: Hold space bar to double speed</li>
