@@ -61,6 +61,8 @@ shift+WHEEL_UP   seek 10; show-text "⯈⯈"
 ZOOMIN           add video-zoom 0.05; show-text "{_("Zoom")}: ${{video-zoom}}" #{_("Zoom In")}
 -                add video-zoom -0.05; show-text "{_("Zoom")}: ${{video-zoom}}" #{_("Zoom Out")}
 ZOOMOUT          add video-zoom -0.05; show-text "{_("Zoom")}: ${{video-zoom}}" #{_("Zoom Out")}
+ctrl+WHEEL_UP    add video-zoom 0.1; show-text "{_("Zoom")}: ${{video-zoom}}"
+ctrl+WHEEL_DOWN  add video-zoom -0.1; show-text "{_("Zoom")}: ${{video-zoom}}"
 ,                add sub-delay -0.1; show-text "{_("Subtitle Delay")}: ${{sub-delay}}" #{_("Decrease Subtitle Delay")}
 .                add sub-delay +0.1; show-text "{_("Subtitle Delay")}: ${{sub-delay}}" #{_("Increase Subtitle Delay")}
 PGUP             add sub-pos -1; show-text "{_("Subtitle Position")}: ${{sub-pos}}" #{_("Move Subtitles Up")}
@@ -288,10 +290,8 @@ def populate_shortcuts_dialog_mpv(dialog, mpv_bindings):
 
     for title, items in sections.items():
         if items:
-            section_widget = (
-                Adw.ShortcutsSection(  # pyright: ignore[reportAttributeAccessIssue]
-                    title=title
-                )
+            section_widget = Adw.ShortcutsSection(  # pyright: ignore[reportAttributeAccessIssue]
+                title=title
             )
             dialog.add(section_widget)
             for label, accels in items:
