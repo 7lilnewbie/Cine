@@ -26,7 +26,7 @@ gi.require_version("GLib", "2.0")
 gi.require_version("Gio", "2.0")
 gi.require_version("Gtk", "4.0")
 from gi.repository import Adw, Gdk, Gio, Gtk
-from .utils import has_host_permission
+from .utils import has_host_permission, is_flatpak
 
 settings = Gio.Settings.new("io.github.diegopvlk.Cine")
 
@@ -65,6 +65,7 @@ def sync_mpv_with_settings(window):
 class Preferences(Adw.Dialog):
     __gtype_name__ = "Preferences"
 
+    warning_header_btn: Gtk.Button = Gtk.Template.Child()
     about_permissions_label: Gtk.Label = Gtk.Template.Child()
     cmd_label: Gtk.Label = Gtk.Template.Child()
     copy_cmd_button: Gtk.Button = Gtk.Template.Child()
@@ -355,18 +356,32 @@ class Preferences(Adw.Dialog):
 
     @Gtk.Template.Callback()
     def _on_btn_warning_map(self, button):
-        l1 = _("Some features requires extra flatpak permissions to work:") + "\n\n"
-        l2 = "• " + _("Auto load subtitle file") + "\n"
-        l3 = "• " + _("Auto add files from the same folder to playlist") + "\n"
-        l4 = "• " + _("Save Playlist").capitalize() + "\n"
-        l5 = "• " + _("Restore Saved Session").capitalize() + "\n"
-        l6 = "• " + _("Save Video Position on Close").capitalize() + "\n\n"
-        l7 = _(
-            "Use Flatseal for granular folder control, or run this command to grant access to all folders in the system:"
-        )
-
-        self.about_permissions_label.set_text(l1 + l2 + l3 + l4 + l5 + l6 + l7)
         button.set_visible(not has_host_permission)
+
+    @Gtk.Template.Callback()
+    def _on_warning_header_btn_map(self, button):
+        if is_flatpak:
+            l1 = _("Some features requires extra flatpak permission to work:") + "\n\n"
+            l2 = "• " + _("Auto load subtitle file") + "\n"
+            l3 = "• " + _("Auto add files from the same folder to playlist") + "\n"
+            l4 = "• " + _("Save Playlist").capitalize() + "\n"
+            l5 = "• " + _("Restore Saved Session").capitalize() + "\n"
+            l6 = "• " + _("Save Video Position on Close").capitalize() + "\n\n"
+
+            if not has_host_permission:
+                l7 = _(
+                    "Use Flatseal for granular folder control, or run this command to grant access to all folders in the system:"
+                )
+            else:
+                l7 = _("Cine has extra permission.")
+                self.warning_header_btn.remove_css_class("warning-header-btn")
+                self.about_permissions_label.set_margin_bottom(10)
+                self.cmd_label.set_visible(False)
+                self.copy_cmd_button.set_visible(False)
+
+            self.about_permissions_label.set_text(l1 + l2 + l3 + l4 + l5 + l6 + l7)
+
+        button.set_visible(is_flatpak)
 
     @Gtk.Template.Callback()
     def _on_copy_cmd_btn_clicked(self, button: Gtk.Button):

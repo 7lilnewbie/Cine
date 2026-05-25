@@ -44,9 +44,11 @@ if os.path.exists(old_last_pl_file):
 
     move(old_last_pl_file, playlist_dir)
 
+is_flatpak = os.environ.get("container") == "flatpak"
+
 
 def get_has_host_permission():
-    if os.environ.get("container") != "flatpak":
+    if not is_flatpak:
         return True
 
     try:

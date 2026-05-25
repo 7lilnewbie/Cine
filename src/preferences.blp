@@ -10,8 +10,8 @@ template $Preferences: Adw.Dialog {
 		[top]
 		Adw.HeaderBar {
 			[start]
-			MenuButton {
-				map => $_on_btn_warning_map();
+			MenuButton warning_header_btn {
+				map => $_on_warning_header_btn_map();
 				tooltip-text: _("About Permissions");
 				icon-name: "info-outline-symbolic";
 
@@ -37,10 +37,12 @@ template $Preferences: Adw.Dialog {
 							spacing: 8;
 
 							Label about_permissions_label {
-								halign: fill;
+								halign: start;
 								justify: fill;
 								max-width-chars: 50;
 								wrap: true;
+								natural-wrap-mode: none;
+								wrap-mode: word_char;
 							}
 
 							Label cmd_label {
@@ -104,7 +106,6 @@ template $Preferences: Adw.Dialog {
 						valign: center;
 
 						styles [
-							"warning",
 							"flat",
 						]
 
@@ -140,7 +141,6 @@ template $Preferences: Adw.Dialog {
 						valign: center;
 
 						styles [
-							"warning",
 							"flat",
 						]
 
