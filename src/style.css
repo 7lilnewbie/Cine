@@ -261,6 +261,19 @@ statuspage box {
   );
 }
 
+.warning-header-btn button:first-child {
+  color: var(--warning-color);
+  --accent-color: var(--warning-color);
+}
+.warning-command {
+  padding: 10px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background-color: var(--view-bg-color);
+  font-size: 0.875em;
+  font-family: "monospace";
+}
+
 @media (prefers-contrast: more) {
   .osd popover:not(.chapter-popover) > contents,
   .osd popover > arrow,
