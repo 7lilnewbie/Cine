@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-25 19:50-0300\n"
+"POT-Creation-Date: 2026-05-26 10:07-0300\n"
 "PO-Revision-Date: 2026-05-03 13:21+0000\n"
 "Last-Translator: Ahmer Jamil Khan <ahmer@khan.am>\n"
 "Language-Team: Urdu <https://hosted.weblate.org/projects/cine/app/ur/>\n"
@@ -107,7 +107,7 @@ msgid "Search"
 msgstr "تلاش"
 
 #: src/playlist.py:182 src/playlist.py:190 src/playlist.py:475
-#: src/preferences.py:367 src/playlist.blp:56
+#: src/preferences.py:370 src/playlist.blp:56
 msgid "Save Playlist"
 msgstr "پلے لسٹ کو محفوظ کریں"
 
@@ -140,51 +140,53 @@ msgid_plural "{n} items"
 msgstr[0] "{n} آئٹم"
 msgstr[1] "{n} آئٹمز"
 
-#: src/preferences.py:111 src/preferences.blp:170
+#: src/preferences.py:112 src/preferences.blp:170
 msgid "Subtitle Color"
 msgstr "سب ٹائٹل کا رنگ"
 
-#: src/preferences.py:125 src/preferences.blp:250
+#: src/preferences.py:126 src/preferences.blp:250
 msgid "Subtitle Background"
 msgstr "سب ٹائٹل پس منظر"
 
-#: src/preferences.py:364
-msgid "Some features require extra flatpak permission to work:"
-msgstr ""
+#: src/preferences.py:367
+msgid "Some features require extra permission to work:"
+msgstr "کچھ خصوصیات کو کام کرنے کے لیے اضافی اجازت کی ضرورت ہوتی ہے:"
 
-#: src/preferences.py:365
+#: src/preferences.py:368
 msgid "Auto load subtitle file"
-msgstr ""
+msgstr "ذیلی عنوان (سب ٹائٹل) فائل خودکار لوڈ کریں"
 
-#: src/preferences.py:366
+#: src/preferences.py:369
 msgid "Auto add files from the same folder to playlist"
-msgstr ""
+msgstr "اسی فولڈر سے فائلوں کو پلے لسٹ میں خودکار شامل کریں"
 
-#: src/preferences.py:368 src/preferences.blp:98
+#: src/preferences.py:371 src/preferences.blp:98
 msgid "Restore Saved Session"
 msgstr "محفوظ شدہ سیشن بحال کریں"
 
-#: src/preferences.py:369 src/preferences.blp:133
+#: src/preferences.py:372 src/preferences.blp:133
 msgid "Save Video Position on Close"
 msgstr "بند کرتے وقت ویڈیو کی پوزیشن محفوظ کریں"
 
-#: src/preferences.py:373
+#: src/preferences.py:376
 msgid ""
 "Use Flatseal for granular folder control, or run this command to grant "
 "access to all folders in the system:"
 msgstr ""
+"فولڈر پر تفصیلی کنٹرول کے لیے Flatseal کا استعمال کریں، یا سسٹم کے تمام "
+"فولڈرز تک رسائی دینے کے لیے یہ کمانڈ چلائیں:"
 
-#: src/preferences.py:376
-msgid "Cine has extra permissions."
-msgstr ""
+#: src/preferences.py:379
+msgid "Extra permission enabled."
+msgstr "اضافی اجازت فعال کر دی گئی۔"
 
-#: src/preferences.py:391
+#: src/preferences.py:394
 msgid "Copied"
-msgstr ""
+msgstr "کاپی ہو گیا"
 
-#: src/preferences.py:397 src/preferences.blp:58
+#: src/preferences.py:400 src/preferences.blp:58
 msgid "Copy"
-msgstr ""
+msgstr "کاپی کریں"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:89 src/shortcuts.py:90
@@ -660,7 +662,7 @@ msgstr "پلے لسٹ میں شامل کریں"
 
 #: src/preferences.blp:15
 msgid "About Permissions"
-msgstr ""
+msgstr "اجازتوں کے بارے میں"
 
 #: src/preferences.blp:81
 msgid "Open New Window for New Files"
@@ -704,27 +706,23 @@ msgstr "کچھ فونٹس شاید کام نہ کریں"
 
 #: src/preferences.blp:269
 msgid "Left Click"
-msgstr ""
+msgstr "بایاں کلک"
 
 #: src/preferences.blp:274
-#, fuzzy
-#| msgid "Play/Pause"
 msgid "Focus/Play/Pause"
-msgstr "چلائیں/روکیں"
+msgstr "فوکس/چلائیں/روکیں"
 
 #: src/preferences.blp:275 src/preferences.blp:287
 msgid "Disabled"
-msgstr ""
+msgstr "معطل"
 
 #: src/preferences.blp:281
 msgid "Right Click"
-msgstr ""
+msgstr "دایاں کلک"
 
 #: src/preferences.blp:286
-#, fuzzy
-#| msgid "Main Menu"
 msgid "Window Menu"
-msgstr "مین مینو"
+msgstr "ونڈو مینو"
 
 #: src/preferences.blp:295
 msgid "Preferred Subtitle Languages"

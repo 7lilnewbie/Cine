@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: io.github.diegopvlk.Cine\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-25 19:50-0300\n"
+"POT-Creation-Date: 2026-05-26 10:07-0300\n"
 "PO-Revision-Date: 2026-04-30 07:09+0000\n"
 "Last-Translator: Diego Povliuk <diego.pvlk@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/cine/app/it/>\n"
@@ -108,7 +108,7 @@ msgid "Search"
 msgstr "Cerca"
 
 #: src/playlist.py:182 src/playlist.py:190 src/playlist.py:475
-#: src/preferences.py:367 src/playlist.blp:56
+#: src/preferences.py:370 src/playlist.blp:56
 msgid "Save Playlist"
 msgstr "Salva la playlist"
 
@@ -142,51 +142,53 @@ msgid_plural "{n} items"
 msgstr[0] "{n} elemento"
 msgstr[1] "{n} elementi"
 
-#: src/preferences.py:111 src/preferences.blp:170
+#: src/preferences.py:112 src/preferences.blp:170
 msgid "Subtitle Color"
 msgstr "Colore sottotitoli"
 
-#: src/preferences.py:125 src/preferences.blp:250
+#: src/preferences.py:126 src/preferences.blp:250
 msgid "Subtitle Background"
 msgstr "Sfondo sottotitoli"
 
-#: src/preferences.py:364
-msgid "Some features require extra flatpak permission to work:"
-msgstr ""
+#: src/preferences.py:367
+msgid "Some features require extra permission to work:"
+msgstr "Alcune funzioni richiedono un'autorizzazione extra per funzionare:"
 
-#: src/preferences.py:365
+#: src/preferences.py:368
 msgid "Auto load subtitle file"
-msgstr ""
+msgstr "Carica automaticamente il file dei sottotitoli"
 
-#: src/preferences.py:366
+#: src/preferences.py:369
 msgid "Auto add files from the same folder to playlist"
-msgstr ""
+msgstr "Aggiungi automaticamente alla playlist i file della stessa cartella"
 
-#: src/preferences.py:368 src/preferences.blp:98
+#: src/preferences.py:371 src/preferences.blp:98
 msgid "Restore Saved Session"
 msgstr "Restaurer la session enregistrée"
 
-#: src/preferences.py:369 src/preferences.blp:133
+#: src/preferences.py:372 src/preferences.blp:133
 msgid "Save Video Position on Close"
 msgstr "Salva la posizione del video alla chiusura"
 
-#: src/preferences.py:373
+#: src/preferences.py:376
 msgid ""
 "Use Flatseal for granular folder control, or run this command to grant "
 "access to all folders in the system:"
 msgstr ""
+"Usa Flatseal per un controllo granulare delle cartelle, oppure esegui questo "
+"comando per concedere l'accesso a tutte le cartelle del sistema:"
 
-#: src/preferences.py:376
-msgid "Cine has extra permissions."
-msgstr ""
+#: src/preferences.py:379
+msgid "Extra permission enabled."
+msgstr "Autorizzazione extra abilitata."
 
-#: src/preferences.py:391
+#: src/preferences.py:394
 msgid "Copied"
-msgstr ""
+msgstr "Copiato"
 
-#: src/preferences.py:397 src/preferences.blp:58
+#: src/preferences.py:400 src/preferences.blp:58
 msgid "Copy"
-msgstr ""
+msgstr "Copia"
 
 #: src/shortcuts.py:29 src/shortcuts.py:30 src/shortcuts.py:31
 #: src/shortcuts.py:32 src/shortcuts.py:89 src/shortcuts.py:90
@@ -662,7 +664,7 @@ msgstr "Aggiungi alla playlist"
 
 #: src/preferences.blp:15
 msgid "About Permissions"
-msgstr ""
+msgstr "Informazioni sui permessi"
 
 #: src/preferences.blp:81
 msgid "Open New Window for New Files"
@@ -708,27 +710,23 @@ msgstr "Alcuni font potrebbero non funzionare"
 
 #: src/preferences.blp:269
 msgid "Left Click"
-msgstr ""
+msgstr "Clic sinistro"
 
 #: src/preferences.blp:274
-#, fuzzy
-#| msgid "Play/Pause"
 msgid "Focus/Play/Pause"
-msgstr "Riproduci/Pausa"
+msgstr "Focus/Riproduci/Pausa"
 
 #: src/preferences.blp:275 src/preferences.blp:287
 msgid "Disabled"
-msgstr ""
+msgstr "Disattivato"
 
 #: src/preferences.blp:281
 msgid "Right Click"
-msgstr ""
+msgstr "Clic destro"
 
 #: src/preferences.blp:286
-#, fuzzy
-#| msgid "Main Menu"
 msgid "Window Menu"
-msgstr "Menù principale"
+msgstr "Menu della finestra"
 
 #: src/preferences.blp:295
 msgid "Preferred Subtitle Languages"
