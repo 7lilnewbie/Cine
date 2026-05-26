@@ -152,7 +152,7 @@ msgstr "Arrière-plan des sous-titres"
 
 #: src/preferences.py:367
 msgid "Some features require extra permission to work:"
-msgstr "Certaines fonctionnalités nécessitent une permission supplémentaire pour fonctionner :
+msgstr "Certaines fonctionnalités nécessitent une permission supplémentaire pour fonctionner :"
 
 #: src/preferences.py:368
 msgid "Auto load subtitle file"
