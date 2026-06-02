@@ -71,12 +71,11 @@ class Playlist(Adw.Dialog):
         self.win = win
         self.mpv = win.mpv
 
-        ls_n_items = win.playlist_ls.get_n_items()
+        n_items = win.playlist_ls.get_n_items()
         shuffle_btn = win.shuffle_toggle_btn
-        shuffle_changed = win.last_shuffle != shuffle_btn.props.active
-        count = self.mpv.playlist_count
+        shuff_changed = win.last_shuffle != shuffle_btn.props.active
 
-        if ls_n_items == 0 or ls_n_items != count or shuffle_changed:
+        if n_items == 0 or n_items == 1 or shuff_changed or win.playlist_changed:
             win._splice_playlist()
 
         self.set_content_height(win.get_height())
@@ -361,10 +360,6 @@ class Playlist(Adw.Dialog):
                 valid_types = ("video/", "audio/", "image/")
                 if mime_type.startswith(valid_types):
                     self.mpv.loadfile(path, "append-play")
-
-                GLib.idle_add(
-                    lambda *a: self.win._on_shuffle_toggled(self.win.shuffle_toggle_btn)
-                )
 
             elif isinstance(item, str):  # URL string
                 self.mpv.loadfile(item, "append-play")

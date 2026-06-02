@@ -151,6 +151,7 @@ class CineWindow(Adw.ApplicationWindow):
         self.playlist_ls: Gio.ListStore = Gio.ListStore.new(PlaylistItemObj)
         self.playlist_debounce_id: int = 0
         self.last_shuffle: bool = False
+        self.playlist_changed: bool = False
         self.has_some_doc_path: bool = False
         self.can_go_prev: bool = False
         self.can_go_next: bool = False
@@ -1749,7 +1750,6 @@ class CineWindow(Adw.ApplicationWindow):
         return False
 
     def _splice_playlist(self):
-        self.last_shuffle = self.shuffle_toggle_btn.props.active
         self.playlist_debounce_id = 0
         self.has_some_doc_path = False
         new_items = []
@@ -1769,6 +1769,8 @@ class CineWindow(Adw.ApplicationWindow):
             dialog._set_item_count()
 
         self.playlist_ls.splice(0, self.playlist_ls.get_n_items(), new_items)
+        self.last_shuffle = self.shuffle_toggle_btn.props.active
+        self.playlist_changed = False
 
     def _setup_observers(self):
         @self.mpv.event_callback("start-file")
@@ -1828,11 +1830,12 @@ class CineWindow(Adw.ApplicationWindow):
 
         @self.mpv.property_observer("playlist-count")
         def on_playlist_count_change(_name, _count):
+            self.playlist_changed = True
             if isinstance(self.get_visible_dialog(), Playlist):
                 if self.playlist_debounce_id > 0:
                     GLib.source_remove(self.playlist_debounce_id)
                     self.playlist_debounce_id = 0
-                self.playlist_debounce_id = GLib.timeout_add(50, self._splice_playlist)
+                self.playlist_debounce_id = GLib.timeout_add(75, self._splice_playlist)
             GLib.idle_add(self._update_playlist_nav_sensitivity)
 
         @self.mpv.property_observer("playlist-pos")
