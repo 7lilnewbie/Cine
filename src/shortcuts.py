@@ -20,10 +20,12 @@
 import gi
 import re
 from gettext import gettext as _, gettext as gt
+from .utils import KEY_REMAP
 
 gi.require_version("Adw", "1")
+gi.require_version("Gdk", "4.0")
 gi.require_version("Gtk", "4.0")
-from gi.repository import Adw, Gtk
+from gi.repository import Adw, Gdk, Gtk
 
 INTERNAL_BINDINGS = f"""\
 UP               no-osd add volume 5; show-text "{_("Volume")}: ${{volume}}%" #{_("Volume Increase")}
@@ -58,9 +60,7 @@ shift+WHEEL_DOWN seek -10; show-text "⯇⯇"
 shift+WHEEL_UP   seek 10; show-text "⯈⯈"
 =                add video-zoom 0.05; show-text "{_("Zoom")}: ${{video-zoom}}" #{_("Zoom In")}
 +                add video-zoom 0.05; show-text "{_("Zoom")}: ${{video-zoom}}" #{_("Zoom In")}
-ZOOMIN           add video-zoom 0.05; show-text "{_("Zoom")}: ${{video-zoom}}" #{_("Zoom In")}
 -                add video-zoom -0.05; show-text "{_("Zoom")}: ${{video-zoom}}" #{_("Zoom Out")}
-ZOOMOUT          add video-zoom -0.05; show-text "{_("Zoom")}: ${{video-zoom}}" #{_("Zoom Out")}
 ctrl+WHEEL_UP    add video-zoom 0.1; show-text "{_("Zoom")}: ${{video-zoom}}"
 ctrl+WHEEL_DOWN  add video-zoom -0.1; show-text "{_("Zoom")}: ${{video-zoom}}"
 ,                add sub-delay -0.1; show-text "{_("Subtitle Delay")}: ${{sub-delay}}" #{_("Decrease Subtitle Delay")}
@@ -73,22 +73,10 @@ m                nonrepeatable no-osd cycle mute; no-osd set user-data/show-icon
 ctrl+-           add audio-delay -0.1; show-text "{_("Audio Delay")}: ${{audio-delay}}" #{_("Decrease Audio Delay")}
 ctrl+=           add audio-delay 0.1; show-text "{_("Audio Delay")}: ${{audio-delay}}" #{_("Increase Audio Delay")}
 ctrl++           add audio-delay 0.1; show-text "{_("Audio Delay")}: ${{audio-delay}}" #{_("Increase Audio Delay")}
-PLAY             cycle pause
-PAUSE            cycle pause
-PLAYPAUSE        cycle pause
-PLAYONLY         set pause no
-PAUSEONLY        set pause yes
-FORWARD          seek 60
-REWIND           seek -60
-NEXT             playlist-next
-PREV             playlist-prev
 ctrl+[           frame-step -1 seek; show-text "⯇⯇" #{_("Go Back One Frame")}
 ctrl+]           frame-step 1 seek; show-text "⯈⯈" #{_("Advance One Frame")}
 Ctrl+LEFT        add chapter -1 #{_("Seek to the Previous Chapter")}
 Ctrl+RIGHT       add chapter 1 #{_("Seek to the Next Chapter")}
-VOLUME_UP        no-osd add volume 5; show-text "{_("Volume")}: ${{volume}}%"
-VOLUME_DOWN      no-osd add volume -5; show-text "{_("Volume")}: ${{volume}}%"
-MUTE             no-osd cycle mute; no-osd set user-data/show-icon "yes"
 s                screenshot #{_("Take Screenshot With Subtitles")}
 S                screenshot video #{_("Take Screenshot Without Subtitles")}
 i                script-binding stats/display-stats #{_("Statistics")}
@@ -108,57 +96,11 @@ L                cycle-values loop-file "inf" "no"; show-text "{_("Loop")}: ${{l
 BS               set speed 1.0; show-text "{_("Speed")}: ${{speed}}×" #{_("Reset Playback Speed")}
 """
 
+MPV_TO_GTK = {v: k for k, v in KEY_REMAP.items()}
+
 
 def translate_mpv_to_gtk(key):
     """Converts mpv key strings to GTK accelerator format with symbol support."""
-    mapping = {
-        "UP": "Up",
-        "DOWN": "Down",
-        "LEFT": "Left",
-        "RIGHT": "Right",
-        "ENTER": "Return",
-        "BS": "BackSpace",
-        "SPACE": "space",
-        "ESC": "Escape",
-        "PGUP": "Page_Up",
-        "PGDWN": "Page_Down",
-        "DEL": "Delete",
-        "HOME": "Home",
-        "END": "End",
-        ".": "period",
-        ",": "comma",
-        "/": "slash",
-        ";": "semicolon",
-        "[": "bracketleft",
-        "]": "bracketright",
-        "{": "braceleft",
-        "}": "braceright",
-        "\\": "backslash",
-        "=": "equal",
-        "-": "minus",
-        "~": "asciitilde",
-        "!": "exclam",
-        "@": "at",
-        "#": "numbersign",
-        "$": "dollar",
-        "%": "percent",
-        "^": "asciicircum",
-        "&": "ampersand",
-        "*": "asterisk",
-        "(": "parenleft",
-        ")": "parenright",
-        "_": "underscore",
-        "+": "plus",
-        ":": "colon",
-        '"': "quotedbl",
-        "<": "less",
-        ">": "greater",
-        "?": "question",
-        "|": "bar",
-        "`": "grave",
-        "'": "apostrophe",
-    }
-
     # Handle single uppercase chars
     if len(key) == 1 and key.isupper():
         key = f"<Shift>{key.lower()}"
@@ -172,14 +114,28 @@ def translate_mpv_to_gtk(key):
     parts = key.split(">")
     base_key = parts[-1]
 
-    # Map the base key if it exists in our dictionary
-    if base_key.upper() in mapping:
-        base_key = mapping[base_key.upper()]
-    elif base_key in mapping:
-        base_key = mapping[base_key]
+    # Map the base key if it exists in the reversed KEY_REMAP
+    if base_key.upper() in MPV_TO_GTK:
+        base_key = MPV_TO_GTK[base_key.upper()]
+    elif base_key in MPV_TO_GTK:
+        base_key = MPV_TO_GTK[base_key]
+
+    # Dynamically resolve single characters/symbols using Gdk
     elif len(base_key) == 1:
-        # GTK accelerators must be lowercase (e.g., <Control>a, not <Control>A)
-        base_key = base_key.lower()
+        unicode_val = ord(base_key)
+        keyval = Gdk.unicode_to_keyval(unicode_val)
+        name = Gdk.keyval_name(keyval)
+
+        if name:
+            # If Gdk returns a single char (like "A"), GTK accelerators need it lowercase ("a")
+            # If it returns a symbol name (like "period"), use it directly
+            if len(name) == 1:
+                base_key = name.lower()
+            else:
+                base_key = name
+        else:
+            # Fallback if Gdk fails to find a name
+            base_key = base_key.lower()
 
     return ">".join(parts[:-1]) + (">" if len(parts) > 1 else "") + base_key
 
