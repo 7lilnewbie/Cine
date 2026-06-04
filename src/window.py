@@ -151,6 +151,7 @@ class CineWindow(Adw.ApplicationWindow):
 
         self.playlist_ls: Gio.ListStore = Gio.ListStore.new(PlaylistItemObj)
         self.playlist_debounce_id: int = 0
+        self.playlist_prev_pos: int
         self.last_shuffle: bool = False
         self.playlist_changed: bool = False
         self.has_some_doc_path: bool = False
@@ -1835,9 +1836,20 @@ class CineWindow(Adw.ApplicationWindow):
             GLib.idle_add(self._update_playlist_nav_sensitivity)
 
         @self.mpv.property_observer("playlist-pos")
-        def on_playlist_pos_changed(name, value):
-            if isinstance(dialog := self.get_visible_dialog(), Playlist):
-                GLib.idle_add(dialog._update_playing_item)
+        def on_playlist_pos_changed(_name, pos):
+            def update_playing_item():
+                try:
+                    prev_p = self.playlist_prev_pos
+                    prev_obj = cast(PlaylistItemObj, self.playlist_ls.get_item(prev_p))
+                    curr_obj = cast(PlaylistItemObj, self.playlist_ls.get_item(pos))
+                    prev_obj.playing = False
+                    curr_obj.playing = True
+                except (AttributeError, OverflowError):
+                    pass
+                finally:
+                    self.playlist_prev_pos = pos
+
+            GLib.idle_add(update_playing_item)
 
         @self.mpv.property_observer("loop-playlist")
         def on_loop_playlist_change(_name, value):

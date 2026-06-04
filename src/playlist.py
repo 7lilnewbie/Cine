@@ -157,7 +157,7 @@ class Playlist(Adw.Dialog):
         self.add_controller(drop_target)
 
         self._set_save_btn_playlist()
-        self._update_playing_item()
+
         GLib.idle_add(
             self.playlist_list_view.scroll_to,
             self.mpv.playlist_pos,
@@ -169,7 +169,6 @@ class Playlist(Adw.Dialog):
         self.mpv.pause = False
         obj = list_view.get_model().get_item(pos)
         self.mpv.playlist_pos = obj.position
-        self._update_playing_item()
         self.close()
 
     def _set_save_btn_playlist(self):
@@ -186,13 +185,6 @@ class Playlist(Adw.Dialog):
         else:
             btn.set_tooltip_text(_("Save Playlist"))
             btn.set_sensitive(True)
-
-    def _update_playing_item(self):
-        for i in range(self.win.playlist_ls.get_n_items()):
-            obj = self.win.playlist_ls.get_item(i)
-            is_playing = i == self.mpv.playlist_pos
-            if obj.playing != is_playing:
-                obj.playing = is_playing
 
     def _on_factory_setup(self, _factory, list_item):
         row = Gtk.Box(height_request=46)
@@ -235,66 +227,64 @@ class Playlist(Adw.Dialog):
 
     def _on_factory_bind(self, _factory, list_item):
         obj = list_item.get_item()
-        item = obj.item
-        row = list_item.get_child()
 
-        path = item.get("filename")
-        name_with_ext = os.path.basename(path)
-        parent_dir = os.path.basename(os.path.dirname(path))
-        dir = parent_dir if parent_dir else path
+        def set_item(item):
+            path = item.get("filename")
+            name_with_ext = os.path.basename(path)
+            parent_dir = os.path.basename(os.path.dirname(path))
+            dir = parent_dir if parent_dir else path
 
-        icon_name = "cine-applications-multimedia-symbolic"
-        file_title = os.path.splitext(name_with_ext)[0]
+            icon_name = "cine-applications-multimedia-symbolic"
+            file_title = os.path.splitext(name_with_ext)[0]
 
-        if not is_local_path(path):
-            content_type = "mpv-url"
-            file_title = item.get("title") or path
-        else:
-            try:
-                info = Gio.File.new_for_path(path).query_info(
-                    "standard::content-type", Gio.FileQueryInfoFlags.NONE, None
-                )
-                content_type = info.get_content_type()
-            except Exception:
-                content_type = "error"
+            if not is_local_path(path):
+                content_type = "mpv-url"
+                file_title = item.get("title") or path
+            else:
+                try:
+                    info = Gio.File.new_for_path(path).query_info(
+                        "standard::content-type", Gio.FileQueryInfoFlags.NONE, None
+                    )
+                    content_type = info.get_content_type()
+                except Exception:
+                    content_type = "error"
 
-        if content_type == "inode/directory":
-            icon_name = "cine-folder-symbolic"
-            file_title = name_with_ext
-            if not os.listdir(path):
-                list_item.icon.set_opacity(0.5)
-                list_item.title.set_opacity(0.5)
-        elif content_type:
-            if "video" in content_type:
-                icon_name = "cine-video-x-generic-symbolic"
-            elif "mpegurl" in content_type:
-                icon_name = "cine-playlist-m3u-symbolic"
-            elif "audio" in content_type:
-                icon_name = "cine-audio-x-generic-symbolic"
-            elif "image" in content_type:
-                icon_name = "cine-image-x-generic-symbolic"
-            elif content_type == "mpv-url":
-                icon_name = "cine-globe-symbolic"
-            elif content_type == "error":
-                icon_name = "cine-warning-symbolic"
+            if content_type == "inode/directory":
+                icon_name = "cine-folder-symbolic"
+                file_title = name_with_ext
+                if not os.listdir(path):
+                    list_item.icon.set_opacity(0.5)
+                    list_item.title.set_opacity(0.5)
+            elif content_type:
+                if "video" in content_type:
+                    icon_name = "cine-video-x-generic-symbolic"
+                elif "mpegurl" in content_type:
+                    icon_name = "cine-playlist-m3u-symbolic"
+                elif "audio" in content_type:
+                    icon_name = "cine-audio-x-generic-symbolic"
+                elif "image" in content_type:
+                    icon_name = "cine-image-x-generic-symbolic"
+                elif content_type == "mpv-url":
+                    icon_name = "cine-globe-symbolic"
+                elif content_type == "error":
+                    icon_name = "cine-warning-symbolic"
 
-        list_item.title.set_text(file_title)
-        dir = GLib.markup_escape_text(dir)
-        file_title = GLib.markup_escape_text(file_title)
-        list_item.title.set_tooltip_markup(f"<b>{dir}</b>\n{file_title}")
-        list_item.icon.set_from_icon_name(icon_name)
+            list_item.title.set_text(file_title)
+            dir = GLib.markup_escape_text(dir)
+            file_title = GLib.markup_escape_text(file_title)
+            list_item.title.set_tooltip_markup(f"<b>{dir}</b>\n{file_title}")
+            list_item.icon.set_from_icon_name(icon_name)
 
-        def set_playing_item(obj, pspec):
+        def set_playing_item(obj, _pspec):
             list_item.playing_icon.props.visible = obj.playing
+            row = list_item.get_child()
             if obj.playing:
                 row.add_css_class("playing-item-playlist")
+                set_item(self.mpv.playlist[obj.position])
             else:
                 row.remove_css_class("playing-item-playlist")
 
-            if not is_local_path(path):
-                if url_title := self.mpv.playlist[obj.position].get("title"):
-                    list_item.title.set_text(url_title)
-
+        set_item(obj.item)
         set_playing_item(obj, None)
 
         list_item.handler_id = obj.connect("notify::playing", set_playing_item)
