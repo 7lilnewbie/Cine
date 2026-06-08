@@ -54,10 +54,10 @@ MBTN_MID         nonrepeatable cycle fullscreen
 MBTN_RIGHT       ignore
 MBTN_BACK        playlist-prev; 
 MBTN_FORWARD     playlist-next; 
-WHEEL_LEFT       seek -10; show-text "⯇⯇"
-WHEEL_RIGHT      seek 10; show-text "⯈⯈"
-shift+WHEEL_DOWN seek -10; show-text "⯇⯇"
-shift+WHEEL_UP   seek 10; show-text "⯈⯈"
+WHEEL_LEFT       seek -5 keyframes; show-text "⯇⯇"
+WHEEL_RIGHT      seek 5 keyframes; show-text "⯈⯈"
+shift+WHEEL_DOWN seek -5 keyframes; show-text "⯇⯇"
+shift+WHEEL_UP   seek 5 keyframes; show-text "⯈⯈"
 =                add video-zoom 0.05; show-text "{_("Zoom")}: ${{video-zoom}}" #{_("Zoom In")}
 +                add video-zoom 0.05; show-text "{_("Zoom")}: ${{video-zoom}}" #{_("Zoom In")}
 -                add video-zoom -0.05; show-text "{_("Zoom")}: ${{video-zoom}}" #{_("Zoom Out")}
