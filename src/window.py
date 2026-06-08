@@ -1207,7 +1207,7 @@ class CineWindow(Adw.ApplicationWindow):
         self.mpv.pause = not self.mpv.pause
 
     def _on_progress_adjusted(self, adjustment):
-        self.mpv.time_pos = adjustment.props.value
+        self.mpv.command_async("seek", adjustment.props.value, "absolute")
 
     def _on_shuffle_toggled(self, button):
         if button.props.active:
