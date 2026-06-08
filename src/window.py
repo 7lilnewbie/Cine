@@ -1985,14 +1985,11 @@ class CineWindow(Adw.ApplicationWindow):
 
         @self.mpv.property_observer("pause")
         def on_pause_change(_name, paused):
+            if self.mpv.eof_reached:  # allow to replay at eof, requires keep-open
+                self.mpv.seek(0, reference="absolute")
+
             GLib.idle_add(self._sync_inhibit)
             GLib.idle_add(self._update_play_pause_icon, paused)
-
-        @self.mpv.property_observer("eof-reached")
-        def on_eof_reached(_name, reached):
-            if reached:  # allow to replay at eof, requires keep-open
-                self.mpv.seek(0, reference="absolute")
-                self.mpv.pause = True
 
         @self.mpv.property_observer("idle-active")
         def on_idle_change(_name, idle_active):
