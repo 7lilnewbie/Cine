@@ -160,7 +160,7 @@ class Playlist(Adw.Dialog):
 
         GLib.idle_add(
             self.playlist_list_view.scroll_to,
-            max(0, self.mpv.playlist_pos),
+            self.mpv.playlist_pos,
             Gtk.ListScrollFlags.FOCUS,
         )
 

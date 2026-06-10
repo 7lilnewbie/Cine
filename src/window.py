@@ -671,7 +671,7 @@ class CineWindow(Adw.ApplicationWindow):
         self.actions[name] = action
 
     def _on_open_playlist(self, *args):
-        if cast(int, self.mpv.playlist_count) == 0:
+        if self.mpv.idle_active:
             return
         playlist = Playlist(self)
         playlist.present(self)
@@ -1122,19 +1122,19 @@ class CineWindow(Adw.ApplicationWindow):
             self.chapters_menu.append_item(item)
 
     def _on_previous_clicked(self, _):
-        pos = cast(int, self.mpv.playlist_pos)
+        pos = abs(cast(int, self.mpv.playlist_pos))
         count = cast(int, self.mpv.playlist_count)
         if pos == 0:
             self.mpv.playlist_pos = count - 1
-        elif pos != -1:
+        else:
             self.mpv.playlist_prev()
 
     def _on_next_clicked(self, _):
-        pos = cast(int, self.mpv.playlist_pos)
+        pos = abs(cast(int, self.mpv.playlist_pos))
         count = cast(int, self.mpv.playlist_count)
         if pos == count - 1:
             self.mpv.playlist_pos = 0
-        elif pos != -1:
+        else:
             self.mpv.playlist_next()
 
     def _on_subtitle_selected(self, action, parameter):
@@ -1990,17 +1990,16 @@ class CineWindow(Adw.ApplicationWindow):
             GLib.idle_add(self._update_play_pause_icon, paused)
 
         @self.mpv.property_observer("idle-active")
-        def on_idle_change(_name, idle_active):
+        def on_idle_change(_name, is_idle):
             def update_state():
-                self.actions["open-sub-menu"].set_enabled(not idle_active)
-                self.actions["open-audio-menu"].set_enabled(not idle_active)
+                self.actions["open-sub-menu"].set_enabled(not is_idle)
+                self.actions["open-audio-menu"].set_enabled(not is_idle)
 
-                self.start_page.set_visible(idle_active)
-                self.controls_box.set_visible(not idle_active)
-                self.gl_area.set_visible(not idle_active)
+                self.start_page.set_visible(is_idle)
+                self.controls_box.set_visible(not is_idle)
+                self.gl_area.set_visible(not is_idle)
 
-                if idle_active:
-                    self.mpv.playlist_clear()
+                if is_idle:
                     self.error_count = 0
                     self.revealer_ui.set_reveal_child(True)
                     self.set_title("")
@@ -2010,7 +2009,7 @@ class CineWindow(Adw.ApplicationWindow):
 
                 self._sync_inhibit()
 
-            if not self.mpv.keep_open and idle_active and not self.startup:
+            if not self.mpv.keep_open and is_idle and not self.startup:
                 self.close()
 
             self.startup = False
