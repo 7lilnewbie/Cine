@@ -72,7 +72,7 @@
   </requires>
 
   <releases>
-    <release version="1.5.2" date="2026-06-10">
+    <release version="1.5.3" date="2026-06-10">
       <description translate="no">
         <ul>
           <li>Improved speed while seeking from progress bar</li>
