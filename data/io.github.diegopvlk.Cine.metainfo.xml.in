@@ -72,6 +72,13 @@
   </requires>
 
   <releases>
+    <release version="1.5.4" date="2026-06-10">
+      <description translate="no">
+        <ul>
+          <li>Hotfix for the app not opening</li>
+        </ul>
+      </description>
+    </release>
     <release version="1.5.3" date="2026-06-10">
       <description translate="no">
         <ul>
