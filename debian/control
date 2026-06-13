@@ -1,0 +1,30 @@
+Source: cine
+Section: video
+Priority: optional
+Maintainer: Diego Povliuk <your@email.com>
+Build-Depends:
+ debhelper-compat (= 13),
+ meson,
+ ninja-build,
+ gettext,
+ blueprint-compiler,
+ desktop-file-utils,
+ appstream,
+ python3,
+ python3-setuptools
+Standards-Version: 4.7.0
+Rules-Requires-Root: no
+
+Package: cine
+Architecture: all
+Depends:
+ ${misc:Depends},
+ ${python3:Depends},
+ python3-gi,
+ python3-mpv,
+ mpv,
+ ffmpeg,
+ gir1.2-gtk-4.0,
+ gir1.2-adw-1
+Description: Modern MPV-based video player
+ Cine is a GTK4/libadwaita video player built on MPV.

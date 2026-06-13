@@ -1,1 +1,5 @@
+cine (1.5.4-1) unstable; urgency=medium
 
+  * Initial Debian package.
+
+ -- Diego Povliuk <your@email.com>  Tue, 24 Jun 2025 12:00:00 +0000

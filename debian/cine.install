@@ -1,0 +1,7 @@
+usr/bin/*
+usr/share/cine/*
+usr/share/applications/*
+usr/share/metainfo/*
+usr/share/glib-2.0/*
+usr/share/icons/*
+usr/share/dbus-1/*
