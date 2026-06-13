@@ -1,0 +1,45 @@
+name: Debian Package
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            build-essential \
+            debhelper \
+            devscripts \
+            dpkg-dev \
+            meson \
+            ninja-build \
+            gettext \
+            blueprint-compiler
+
+      - name: Build package
+        run: |
+          dpkg-buildpackage -us -uc -b
+
+      - name: Upload package
+        uses: actions/upload-artifact@v4
+        with:
+          name: deb
+          path: ../*.deb
+
+      - name: Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ../*.deb
