@@ -1,10 +1,10 @@
-name: Debian Package
+name: Build Debian Package
 
 on:
+  workflow_dispatch:
   push:
     tags:
       - "v*"
-  workflow_dispatch:
 
 jobs:
   build:
@@ -15,31 +15,26 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Install dependencies
+      - name: Install packaging tools
         run: |
           sudo apt update
           sudo apt install -y \
-            build-essential \
-            debhelper \
             devscripts \
-            dpkg-dev \
-            meson \
-            ninja-build \
-            gettext \
-            blueprint-compiler
+            equivs
 
-      - name: Build package
+      - name: Install build dependencies
+        run: |
+          sudo mk-build-deps \
+            --install \
+            --remove \
+            --tool "apt-get -y --no-install-recommends" \
+            debian/control
+
+      - name: Build
         run: |
           dpkg-buildpackage -us -uc -b
 
-      - name: Upload package
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
-          name: deb
+          name: cine-deb
           path: ../*.deb
-
-      - name: Release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: ../*.deb
