@@ -29,7 +29,11 @@ jobs:
             --remove \
             --tool "apt-get -y --no-install-recommends" \
             debian/control
-
+            
+      - name: Fix permissions
+        run: |
+          chmod +x debian/rules
+    
       - name: Build
         run: |
           dpkg-buildpackage -us -uc -b
