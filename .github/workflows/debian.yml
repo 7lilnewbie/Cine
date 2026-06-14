@@ -22,14 +22,13 @@ jobs:
             devscripts \
             equivs
 
-      - name: Install latest Blueprint compiler
+      - name: Show versions
         run: |
-          pipx install blueprint-compiler
-
-      - name: Install latest Blueprint compiler
-        run: |
-          python3 -m pip install --user blueprint-compiler
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          blueprint-compiler --version || true
+          pkg-config --modversion gtk4 || true
+          pkg-config --modversion libadwaita-1 || true
+          apt-cache policy blueprint-compiler
+          apt-cache policy libadwaita-1-dev
 
       - name: Install build dependencies
         run: |
