@@ -4,12 +4,17 @@ Priority: optional
 Maintainer: Diego Povliuk <your@email.com>
 Build-Depends:
  debhelper-compat (= 13),
+ dh-sequence-python3,
  meson,
  ninja-build,
  gettext,
  blueprint-compiler,
  desktop-file-utils,
  appstream,
+ pkgconf,
+ libglib2.0-dev,
+ libgtk-4-dev,
+ libadwaita-1-dev,
  python3,
  python3-setuptools
 Standards-Version: 4.7.0
